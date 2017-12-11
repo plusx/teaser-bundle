@@ -102,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'					=> array('protected', 'applyFilter'),
+		'__selector__'					=> array('protected', 'addFilter'),
 		'default'						=> '{title_legend},title;{filter_legend:hide},addFilter;{protected_legend:hide},protected'
 	),
 
@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 	'subpalettes' => array
 	(
 		'protected'						=> 'groups',
-		'addFilter'						=> 'filterelements',
+		'addFilter'					=> 'filterelements',
 	),
 
 	// Fields
@@ -161,28 +161,12 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 			'eval'						=> array('submitOnChange'=>true),
 			'sql'						=> "char(1) NOT NULL default ''"
 		),
-		// 'filterelements' => array
-		// (
-		// 	'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['filterelements'],
-		// 	'elementLabel'				=> '%s. Filter',
-		// 	'inputType'					=> 'list',
-		// 	'minItems'					=> 1,
-		// 	'maxItems'					=> 20,
-		// 	'fields'					=> array(
-		// 		'text' => array
-		// 		(
-		// 			'label'				=> &$GLOBALS['TL_LANG']['tl_teaser']['filterelement'],
-		// 			'eval'				=> array('maxlength'=>255, 'tl_class'=>'w50'),
-		// 			'inputType'			=> 'text',
-		// 		),
-		// 	),
-		// ),
 		'filterelements' => array
 		(
 			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['filterelements'],
 			'exclude'					=> true,
-			'inputType'					=> 'optionWizard',
-			'eval'						=> array('mandatory'=>true, 'allowHtml'=>false),
+			'inputType'					=> 'listWizard',
+			'eval'						=> array('mandatory'=>true, 'allowHtml'=>false, 'helpwizard'=>false),
 			'sql'						=> "blob NULL"
 		)
 
@@ -209,6 +193,11 @@ class tl_teaser extends Backend
 		$this->import('BackendUser', 'User');
 	}
 
+
+	public function listImportWizard()
+	{
+		return ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . Image::getHtml('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
+	}
 
 	/**
 	 * Check permissions to edit table tl_calendar

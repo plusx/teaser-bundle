@@ -16,7 +16,7 @@ System::loadLanguageFile('tl_content');
 
 
 /**
- * Table tl_calendar_events
+ * Table tl_teaser_items
  */
 $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 (
@@ -26,7 +26,6 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_teaser',
-		'ctable'                      => array('tl_content'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
@@ -38,8 +37,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'alias' => 'index',
-				'pid,start,stop,published' => 'index'
+				'pid' => 'index'
 			)
 		)
 	),
@@ -50,8 +48,8 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'sorting' => array
 		(
 			'mode'                    => 4,
-			'fields'                  => array('startTime DESC'),
-			'headerFields'            => array('title', 'tstamp', 'protected'),
+			'fields'                  => array('id DESC'),
+			'headerFields'            => array('title', 'protected', 'filterelements'),
 			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_teaser_items', 'listTeaseritems')
 		),
@@ -70,14 +68,8 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_teaser_items']['edit'],
-				'href'                => 'table=tl_content',
-				'icon'                => 'edit.svg'
-			),
-			'editheader' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_teaser_items']['editmeta'],
 				'href'                => 'act=edit',
-				'icon'                => 'header.svg'
+				'icon'                => 'edit.svg'
 			),
 			'copy' => array
 			(
@@ -103,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_teaser_items']['toggle'],
 				'icon'                => 'visible.svg',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_calendar_events', 'toggleIcon')
+				'button_callback'     => array('tl_teaser_items', 'toggleIcon')
 			),
 			'show' => array
 			(
@@ -117,20 +109,17 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('chooseTeaserType', 'applyFilter'),
-		'default'                     => '{type_legend},chooseTeaserType;
-										  {teaser_legend},headline,singleSRC,subHeadline,teaserItemText;
-										  {filter_legend},applyFilter;
-										  {publish_legend},published,start,stop'
+		'__selector__'                => array('teaserType', 'applyFilter'),
+		'default'                     => '{type_legend},teaserType;{teaserItems_legend},headline,singleSRC,ubHeadline,teaserItemText;{filter_legend},applyFilter;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'chooseTeaserType_link'           => 'jumpTo,linkText',
-		'chooseTeaserType_download'       => 'fileSRC',
-		'chooseTeaserType_downloadvideo'  => 'fileSRC,youtube',
-		'applyFilter'                     => 'availableFilter'
+		'teaserType_link'             => 'jumpTo,linkText',
+		'teaserType_download'         => 'fileSRC',
+		'teaserType_video'            => 'fileSRC,youtube',
+		'applyFilter'                 => 'availableFilter'
 	),
 
 	// Fields
@@ -150,16 +139,16 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'chooseTeaserType' => array
+		'teaserType' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['chooseTeaserType'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserType'],
 			'default'                 => 'page',
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'radio',
 			'options_callback'        => array('tl_teaser_items', 'getSourceOptions'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_teaser_items']['reference']['chooseTeaserType'],
-			'eval'                    => array('submitOnChange' => true, 'helpwizard' => true, 'mandatory' => true),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_teaser_items']['reference']['teaserType'],
+			'eval'                    => array('submitOnChange' => true, 'mandatory' => true),
 			'sql'                     => "varchar(12) NOT NULL default ''",
 		),
 		'jumpTo' => array
@@ -206,11 +195,11 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'headline' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['headline'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserHeadline'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'input',
-			'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50 clr'),
+			'eval'                    => array('maxlength'=>200, 'mandatory'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'singleSRC' => array
@@ -227,11 +216,11 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'subHeadline' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['subHeadline'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserSubHeadline'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'input',
-			'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50 clr'),
+			'eval'                    => array('maxlength'=>200, 'mandatory'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'teaserItemText' => array
@@ -240,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>false),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>false, 'rows'=> 5, 'cols'=>20),
 			'sql'                     => "mediumtext NULL"
 		),
 		'applyFilter' => array
@@ -262,7 +251,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'published' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['published'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 2,
@@ -272,7 +261,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'start' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['start'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -280,7 +269,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'stop' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['stop'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -311,7 +300,7 @@ class tl_teaser_items extends Backend
 
 
 	/**
-	 * Check permissions to edit table tl_calendar_events
+	 * Check permissions to edit table tl_teaser_items
 	 *
 	 * @throws Contao\CoreBundle\Exception\AccessDeniedException
 	 */
@@ -428,7 +417,7 @@ class tl_teaser_items extends Backend
 	{
 		if ($this->User->isAdmin)
 		{
-			return array('link', 'download', 'downloadvideo');
+			return array('link', 'download', 'video');
 		}
 	}
 
@@ -531,22 +520,7 @@ class tl_teaser_items extends Backend
 	 */
 	public function listTeaseritems($arrRow)
 	{
-		$span = Teaser::calculateSpan($arrRow['startTime'], $arrRow['endTime']);
-
-		if ($span > 0)
-		{
-			$date = Date::parse(Config::get(($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')), $arrRow['startTime']) . $GLOBALS['TL_LANG']['MSC']['cal_timeSeparator'] . Date::parse(Config::get(($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')), $arrRow['endTime']);
-		}
-		elseif ($arrRow['startTime'] == $arrRow['endTime'])
-		{
-			$date = Date::parse(Config::get('dateFormat'), $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . Date::parse(Config::get('timeFormat'), $arrRow['startTime']) : '');
-		}
-		else
-		{
-			$date = Date::parse(Config::get('dateFormat'), $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . Date::parse(Config::get('timeFormat'), $arrRow['startTime']) . $GLOBALS['TL_LANG']['MSC']['cal_timeSeparator'] . Date::parse(Config::get('timeFormat'), $arrRow['endTime']) : '');
-		}
-
-		return '<div class="tl_content_left">' . $arrRow['title'] . ' <span style="color:#999;padding-left:3px">[' . $date . ']</span></div>';
+		return $arrRow;
 	}
 
 	/**
