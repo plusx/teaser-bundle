@@ -1,0 +1,16 @@
+<div class="teaser col-xs-12 col-sm-4">
+	<div class="inside">
+		<h2>Image Flyer</h2>
+			<figure class="image_container" itemscope="" itemtype="http://schema.org/ImageObject">
+			<img src="files/content/teaser/Boston%20City%20Flow.jpg" width="800" height="534" alt="" itemprop="image">
+			<div class="teasertext">
+				<strong>Automatic Anti-Drone Security</strong><br>
+				Format: PDF (8 pages)<br>
+				Resolution: Web
+				<p>
+					<a href="#">Download (876,3 KB)</a>
+				</p>
+			</div>
+		</figure>
+	</div>
+</div>
