@@ -14,7 +14,6 @@
  */
 System::loadLanguageFile('tl_content');
 
-
 /**
  * Table tl_teaser_items
  */
@@ -37,7 +36,8 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid' => 'index',
+				'pid,start,stop,published' => 'index'
 			)
 		)
 	),
@@ -109,17 +109,19 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('teaserType', 'applyFilter'),
-		'default'                     => '{type_legend},teaserType;{teaserItems_legend},headline,singleSRC,ubHeadline,teaserItemText;{filter_legend},applyFilter;{publish_legend},published,start,stop'
+		'__selector__'                => array('teaserType'),
+		'default'                     => '{type_legend},teaserType',
+		'link'                        => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop',
+		'download'                    => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop',
+		'video'                       => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'teaserType_link'             => 'jumpTo,linkText',
-		'teaserType_download'         => 'fileSRC',
-		'teaserType_video'            => 'fileSRC,youtube',
-		'applyFilter'                 => 'availableFilter'
+		'link'             => 'jumpTo,linkText',
+		'download'         => 'fileSRC',
+		'video'            => 'fileSRC,youtube'
 	),
 
 	// Fields
@@ -142,13 +144,11 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'teaserType' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserType'],
-			'default'                 => 'page',
+			'default'                 => 'link',
 			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'radio',
-			'options_callback'        => array('tl_teaser_items', 'getSourceOptions'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_teaser_items']['reference']['teaserType'],
-			'eval'                    => array('submitOnChange' => true, 'mandatory' => true),
+			'inputType'               => 'select',
+			'options'                 => array('link', 'download', 'video'),
+			'eval'                    => array('chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(12) NOT NULL default ''",
 		),
 		'jumpTo' => array
@@ -170,12 +170,14 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'fileSRC'                     => array(
+		'fileSRC' => array
+		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['fileSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
-			'load_callback'           => array(
+			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
+			'load_callback'           => array
+			(
 			    array('tl_teaser_items', 'setSingleSrcFlags'),
 			),
 			'sql'                     => "binary(16) NULL",
@@ -198,8 +200,8 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserHeadline'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'input',
-			'eval'                    => array('maxlength'=>200, 'mandatory'=>true, 'tl_class'=>'w50 clr'),
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'singleSRC' => array
@@ -219,8 +221,8 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserSubHeadline'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'input',
-			'eval'                    => array('maxlength'=>200, 'mandatory'=>true, 'tl_class'=>'w50 clr'),
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'teaserItemText' => array
@@ -229,16 +231,8 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>false, 'rows'=> 5, 'cols'=>20),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>false, 'style'=>'min-height:150px;resize:vertical;', 'tl_class'=>'w50 clr'),
 			'sql'                     => "mediumtext NULL"
-		),
-		'applyFilter' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['addTime'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'availableFilter' => array
 		(
@@ -248,6 +242,14 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'options_callback'        => array('tl_teaser_items', 'getAvailableFilter'),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL",
+		),
+		'applyFilter' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['applyFilter'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'published' => array
 		(
@@ -415,10 +417,10 @@ class tl_teaser_items extends Backend
 	 */
 	public function getSourceOptions(DataContainer $dc)
 	{
-		if ($this->User->isAdmin)
-		{
+		// if ($this->User->isAdmin)
+		// {
 			return array('link', 'download', 'video');
-		}
+		// }
 	}
 
 	/**
@@ -426,19 +428,30 @@ class tl_teaser_items extends Backend
 	 *
 	 * @return array
 	 */
-	public function getAvailableFilter()
+	public function getAvailableFilter(DataContainer $dc)
 	{
-		// $filter = $this->Database->prepare("SELECT rsce_data FROM tl_content WHERE type = 'rsce_filter' " )->execute($this->filterelemente);
-		// if($filter->numRows)
-		// {
-		// 	$filters = $filter->fetchAllAssoc();
-		// }
-		// $data = json_decode($filters[0]['rsce_data']);
-		// foreach ($data->filterelemente as $value) {
-		// 	$filterarray[preg_replace('/\W+/','',strtolower(strip_tags($value->text)))] = $value->text;
-		// }
-		// return $filterarray;
+		$arrOptions = array('page', 'file', 'download', 'article', 'external');
+
+		return $arrOptions;
 	}
+	// public function getAvailableFilter(DataContainer $dc)
+	// {
+	// 	$filter = $this->Database->prepare("SELECT filterelements FROM tl_teaser WHERE pid=?" )->execute($dc->pid);
+	// 	// if($filter->numRows)
+	// 	// {
+	// 	// 	$filters = $filter->fetchAllAssoc();
+	// 	// }
+	// 	// print_r($filters);
+	// 	// $data = json_decode($filters[0]['rsce_data']);
+	// 	// foreach ($data->filterelemente as $value) {
+	// 	// 	$filterarray[preg_replace('/\W+/','',strtolower(strip_tags($value->text)))] = $value->text;
+	// 	// }
+	// 	// $filters =  array('hurz', 'purz', 'furz');
+	// 	// return $filters;
+	// 	// return array('hurz', 'purz', 'furz');
+	// 	$varValue = deserialize($filter, true);
+	// 	return $varValue;
+	// }
 
 	/**
 	 * Extract the YouTube ID from an URL

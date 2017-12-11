@@ -30,7 +30,7 @@ class ModuleTeaserFilter extends \Module
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_teaserfilter';
+	protected $strTemplate = 'mod_teaserfilter_default';
 
 
 	/**

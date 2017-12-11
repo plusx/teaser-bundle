@@ -30,7 +30,7 @@ class ModuleTeaser extends \Module
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_teaser';
+	protected $strTemplate = 'mod_teaser_default';
 
 
 	/**
@@ -38,25 +38,25 @@ class ModuleTeaser extends \Module
 	 *
 	 * @return string
 	 */
-	public function generate()
-	{
-		if (TL_MODE == 'BE')
-		{
-			/** @var BackendTemplate|object $objTemplate */
-			$objTemplate = new \BackendTemplate('be_wildcard');
+	// public function generate()
+	// {
+	// 	// if (TL_MODE == 'BE')
+	// 	// {
+	// 	// 	/** @var BackendTemplate|object $objTemplate */
+	// 	// 	$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaseritems'][0]) . ' ###';
-			$objTemplate->title = $this->headline;
-			$objTemplate->id = $this->id;
-			$objTemplate->link = $this->name;
-			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
+	// 	// 	$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaseritems'][0]) . ' ###';
+	// 	// 	$objTemplate->title = $this->title;
+	// 	// 	$objTemplate->id = $this->id;
+	// 	// 	$objTemplate->link = $this->name;
+	// 	// 	$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
-			return $objTemplate->parse();
-		}
+	// 	// 	return $objTemplate->parse();
+	// 	// }
 
-		return parent::generate();
+	// 	return parent::generate();
 
-	}
+	// }
 
 
 	/**
@@ -64,6 +64,7 @@ class ModuleTeaser extends \Module
 	 */
 	protected function compile()
 	{
-		//
+		$this->Template->helloworld = 'helloworld';
+		echo 'hurz';
 	}
 }

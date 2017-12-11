@@ -10,7 +10,7 @@
 
 namespace Dehil;
 
-class TeaseritemsModel extends \Model
+class TeaserFilterModel extends Model
 {
 
 	/**

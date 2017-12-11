@@ -1,0 +1,6 @@
+<?php echo $x; ?>
+<?php
+	echo $this->helloworld;
+	echo 'hurz';
+?>
+<p>hurz purz</p>

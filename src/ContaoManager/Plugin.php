@@ -10,8 +10,8 @@
 
 namespace Dehil\TeaserBundle\ContaoManager;
 
-use Dehil\TeaserBundle\DehilTeaserBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
+use Dehil\TeaserBundle\DehilTeaserBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
@@ -31,7 +31,7 @@ class Plugin implements BundlePluginInterface
         return [
             BundleConfig::create(DehilTeaserBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
-                // ->setReplace(['calendar']),
+                ->setReplace(['teaser']),
         ];
     }
 }
