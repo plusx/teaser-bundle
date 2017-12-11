@@ -28,7 +28,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
  */
 array_insert($GLOBALS['FE_MOD'], 2, array
 (
-	'teaseritems' => array
+	'teaser' => array
 	(
 		'teaser'			=> 'ModuleTeaser',
 		'teaserfilter'		=> 'ModuleTeaserFilter'
