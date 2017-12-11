@@ -32,7 +32,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'onload_callback' => array
 		(
 			array('tl_teaser_items', 'checkPermission')
-		)
+		),
 		'sql' => array
 		(
 			'keys' => array
