@@ -47,7 +47,7 @@ class ModuleTeaserList extends \Module
 	 */
 	protected function compile()
 	{
-		$this->Template->helloworld = 'helloworld';
-		echo 'hurz';
+
+
 	}
 }

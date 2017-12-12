@@ -11,22 +11,22 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,headline,type;{config_legend},getTeaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,headline,type;{config_legend},getTeaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 /**
 * Add fields to tl_module
 */
-$GLOBALS['TL_DCA']['tl_module']['fields']['getTeaserCategory'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['teaserCategory'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['getTeaserCategory'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['teaserCategory'],
 	'exclude'                 => true,
 	'inputType'               => 'radio',
-	'options_callback'        => array('tl_module_teaser_category', 'getTeaserCategory'),
+	'options_callback'        => array('tl_module_teaser', 'getTeaserCategory'),
 	'eval'                    => array('mandatory'=>true),
 	'sql'                     => "blob NULL"
 );
 
-class tl_module_teaser_category extends Backend
+class tl_module_teaser extends Backend
 {
 	/**
 	 * Get all news archives and return them as array
@@ -35,7 +35,7 @@ class tl_module_teaser_category extends Backend
 	public function getTeaserCategory()
 	{
 		$arrTeaser = array();
-		$objTeaser = $this->Database->execute("SELECT id, title FROM tl_teaser ORDER BY title");
+		$objTeaser = $this->Database->execute("SELECT id, title FROM tl_teaser_category ORDER BY title");
 		while ($objTeaser->next())
 		{
 			$arrTeaser[$objTeaser->id] = $objTeaser->title;

@@ -45,6 +45,11 @@
             "src/Resources/contao/templates/"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dehil\\TeaserBundle\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "preferred-install": "dist"
     },
