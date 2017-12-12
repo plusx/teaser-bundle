@@ -10,7 +10,6 @@
 
 namespace Dehil;
 
-use Contao\CoreBundle\Exception\PageNotFoundException;
 use Patchwork\Utf8;
 
 

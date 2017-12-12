@@ -11,10 +11,10 @@
 /**
  * Add palettes to tl_module
  */
-// $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,type;{config_legend},getTeaser;{template_legend:hide},tea_list_template,customTpl;{expert_legend:hide},guests,cssID';
-// $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,type;{config_legend},getTeaser;{template_legend:hide},tea_filt_template,customTpl;{expert_legend:hide},guests,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,type;{config_legend},getTeaser;{expert_legend:hide},guests,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,type;{config_legend},getTeaser;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,type;{config_legend},getTeaser;{template_legend:hide},tea_list_template,customTpl;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,type;{config_legend},getTeaser;{template_legend:hide},tea_filt_template,customTpl;{expert_legend:hide},guests,cssID';
+// $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,type;{config_legend},getTeaser;{expert_legend:hide},guests,cssID';
+// $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,type;{config_legend},getTeaser;{expert_legend:hide},guests,cssID';
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['getTeaser'] = array
 (

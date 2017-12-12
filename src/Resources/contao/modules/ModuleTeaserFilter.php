@@ -10,7 +10,6 @@
 
 namespace Dehil;
 
-use Contao\CoreBundle\Exception\PageNotFoundException;
 use Patchwork\Utf8;
 
 
@@ -64,7 +63,7 @@ class ModuleTeaserFilter extends \Module
 	 */
 	protected function compile()
 	{
-		$this->Template->helloworld = 'helloworld';
+		$this->Template->helloworld = 'hello world';
 		echo 'purz';
 	}
 }
