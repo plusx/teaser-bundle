@@ -8,7 +8,7 @@
  * @license LGPL-3.0+
  */
 
-namespace Dehil\TeaserBundle\ContaoManager;
+namespace Dehil\TeaserBundle;
 
 use Dehil\TeaserBundle\DehilTeaserBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
