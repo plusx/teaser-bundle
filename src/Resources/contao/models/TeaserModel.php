@@ -8,7 +8,8 @@
  * @license LGPL-3.0+
  */
 
-namespace Dehil\TeaserBundle;
+// namespace Dehil\TeaserBundle;
+namespace Contao;
 
 class TeaserModel extends \Model
 {

@@ -8,7 +8,8 @@
  * @license LGPL-3.0+
  */
 
-namespace Dehil\TeaserBundle;
+// namespace Dehil;
+namespace Contao;
 
 use Patchwork\Utf8;
 

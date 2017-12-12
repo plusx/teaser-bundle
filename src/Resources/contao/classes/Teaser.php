@@ -9,7 +9,8 @@
  */
 
 
-namespace Dehil\TeaserBundle;
+// namespace Dehil;
+namespace Contao;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
 
