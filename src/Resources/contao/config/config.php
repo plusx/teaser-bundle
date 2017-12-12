@@ -16,9 +16,9 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'teaser' => array
 	(
-		'tables'      => array('tl_teaser', 'tl_teaser_items'),
-		'table'       => array('TableWizard', 'importTable'),
-		'list'        => array('ListWizard', 'importList')
+		'tables'      => array('tl_teaser', 'tl_teaser_items')
+		// 'table'       => array('TableWizard', 'importTable'),
+		// 'list'        => array('ListWizard', 'importList')
 	)
 ));
 
@@ -30,7 +30,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'teaser' => array
 	(
-		'teaser'			=> 'ModuleTeaser',
+		'teaserlist'		=> 'ModuleTeaserList',
 		'teaserfilter'		=> 'ModuleTeaserFilter'
 	)
 ));

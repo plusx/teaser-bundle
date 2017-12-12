@@ -23,14 +23,14 @@ use Patchwork\Utf8;
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class ModuleTeaserFilter extends \Module
+class ModuleTeaserList extends \Module
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_teaserfilter';
+	protected $strTemplate = 'mod_teaserlist';
 
 
 	/**
@@ -45,8 +45,8 @@ class ModuleTeaserFilter extends \Module
 			/** @var BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaserfilter'][0]) . ' ###';
-			$objTemplate->title = $this->headline;
+			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaserlist'][0]) . ' ###';
+			$objTemplate->title = $this->title;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
 			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
@@ -65,6 +65,6 @@ class ModuleTeaserFilter extends \Module
 	protected function compile()
 	{
 		$this->Template->helloworld = 'helloworld';
-		echo 'purz';
+		echo 'hurz';
 	}
 }

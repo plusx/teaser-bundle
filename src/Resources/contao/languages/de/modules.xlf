@@ -1,0 +1,38 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/modules.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="MOD.teaser.0">
+        <source>Teaser Modul</source>
+        <target>Teaser Modul</target>
+      </trans-unit>
+      <trans-unit id="MOD.teaser.1">
+        <source>Manage teasers</source>
+        <target>Teaser verwalten</target>
+      </trans-unit>
+      <trans-unit id="MOD.tl_teaser_items">
+        <source>Teaser</source>
+        <target>Teaser</target>
+      </trans-unit>
+      <trans-unit id="FMD.teaser">
+        <source>Teaser</source>
+        <target>Teaser</target>
+      </trans-unit>
+      <trans-unit id="FMD.teaserlist.0">
+        <source>Teaser list</source>
+        <target>Teaser-Liste</target>
+      </trans-unit>
+      <trans-unit id="FMD.teaserlist.1">
+        <source>Adds a list of teaser to the page</source>
+        <target>Fügt der Seite eine Liste von Teasern hinzu</target>
+      </trans-unit>
+      <trans-unit id="FMD.teaserfilter.0">
+        <source>Teaser filter</source>
+        <target>Teaser-Filter</target>
+      </trans-unit>
+      <trans-unit id="FMD.teaserfilter.1">
+        <source>Adds filters for teaser elements</source>
+        <target>Fügt einen Filter für Teaser-Elemente hinzu</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

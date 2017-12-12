@@ -193,12 +193,6 @@ class tl_teaser extends Backend
 		$this->import('BackendUser', 'User');
 	}
 
-
-	public function listImportWizard()
-	{
-		return ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . Image::getHtml('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
-	}
-
 	/**
 	 * Check permissions to edit table tl_calendar
 	 *

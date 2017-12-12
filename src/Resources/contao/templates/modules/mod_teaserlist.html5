@@ -1,4 +1,3 @@
-<?php echo $x; ?>
 <?php
 	echo $this->helloworld;
 	echo 'hurz';

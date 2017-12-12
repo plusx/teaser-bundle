@@ -119,9 +119,9 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'link'             => 'jumpTo,linkText',
-		'download'         => 'fileSRC',
-		'video'            => 'fileSRC,youtube'
+		'teaserType_link'             => 'jumpTo,linkText',
+		'teaserType_download'         => 'fileSRC',
+		'teaserType_video'            => 'fileSRC,youtube'
 	),
 
 	// Fields
@@ -144,11 +144,10 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'teaserType' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserType'],
-			'default'                 => 'link',
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('link', 'download', 'video'),
-			'eval'                    => array('chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(12) NOT NULL default ''",
 		),
 		'jumpTo' => array
@@ -167,7 +166,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => array('maxlength'=>255, 'mandatory'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fileSRC' => array
@@ -209,7 +208,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr', 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'load_callback' => array
 			(
 				array('tl_teaser_items', 'setSingleSrcFlags')
@@ -533,7 +532,11 @@ class tl_teaser_items extends Backend
 	 */
 	public function listTeaseritems($arrRow)
 	{
-		return $arrRow;
+		// $imagepath = $this->Database->prepare("SELECT path FROM tl_files WHERE tl_files.uuid = ?")->execute($arrRow['singleSRC'])->path;
+		// $image = $this->generateImage($this->getImage($imagepath, 100, 60, 'center_center'), $arrRow['title']);
+		// $date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
+		// return '<div class="teaseritemDescription">' . $image . '<div class="teaseitemInfo"><strong>Title:</strong> ' . $arrRow['title'] . '<br><strong>Type:</strong> ' . $arrRow['type'] . '</div></div>';
+		return print_r($arrRow);
 	}
 
 	/**
