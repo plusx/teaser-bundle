@@ -29,7 +29,7 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create('Dehil/TeaserBundle/DehilTeaserBundle')
+            BundleConfig::create('Dehil\TeaserBundle\DehilTeaserBundle')
                 ->setLoadAfter(['Contao\CoreBundle\ContaoCoreBundle'])
                 ->setReplace(['teaser']),
         ];
