@@ -8,7 +8,8 @@
  * @license LGPL-3.0+
  */
 
-namespace Dehil;
+
+namespace Dehil\TeaserBundle;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
 

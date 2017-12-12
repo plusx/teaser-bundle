@@ -8,7 +8,7 @@
  * @license LGPL-3.0+
  */
 
-namespace Dehil;
+namespace Dehil\TeaserBundle;
 
 class TeaserModel extends \Model
 {

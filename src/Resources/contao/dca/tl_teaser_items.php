@@ -12,7 +12,7 @@
 /**
  * Load tl_content language file
  */
-System::loadLanguageFile('tl_content');
+// System::loadLanguageFile('tl_content');
 
 /**
  * Table tl_teaser_items
