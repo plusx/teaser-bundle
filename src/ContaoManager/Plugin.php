@@ -3,15 +3,15 @@
 /*
  * This file is part of Contao.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * Copyright (c) 2005-2017 Dennis Hilpmann
  *
  * @license LGPL-3.0+
  */
 
 namespace Dehil\TeaserBundle\ContaoManager;
 
-use Dehil\TeaserBundle\DehilTeaserBundle;
-use Contao\CoreBundle\ContaoCoreBundle;
+// use Dehil\TeaserBundle\DehilTeaserBundle;
+// use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
@@ -29,8 +29,8 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(DehilTeaserBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
+            BundleConfig::create('Dehil/TeaserBundle/DehilTeaserBundle')
+                ->setLoadAfter(['Contao\CoreBundle\ContaoCoreBundle'])
                 ->setReplace(['teaser']),
         ];
     }

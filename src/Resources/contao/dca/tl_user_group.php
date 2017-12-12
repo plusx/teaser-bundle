@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * Copyright (c) 2005-2017 Dennis Hilpmann
  *
  * @license LGPL-3.0+
  */
@@ -17,8 +16,6 @@ Contao\CoreBundle\DataContainer\PaletteManipulator::create()
     ->addField(array('teasers', 'teaserp'), 'teasers_legend', Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('default', 'tl_user_group')
 ;
-
-
 /**
  * Add fields to tl_user_group
  */
@@ -31,7 +28,6 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['teasers'] = array
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "blob NULL"
 );
-
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['teaserp'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['teaserp'],

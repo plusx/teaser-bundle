@@ -1,14 +1,11 @@
 <?php
-
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * Copyright (c) 2005-2017 Dennis Hilpmann
  *
  * @license LGPL-3.0+
  */
-
-
 /**
  * Load tl_content language file
  */
@@ -24,7 +21,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ptable'                      => 'tl_teaser',
+		'ptable'                      => 'tl_teaser_category',
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
@@ -133,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_teaser.title',
+			'foreignKey'              => 'tl_teaser_category.title',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
@@ -435,7 +432,7 @@ class tl_teaser_items extends Backend
 	}
 	// public function getAvailableFilter(DataContainer $dc)
 	// {
-	// 	$filter = $this->Database->prepare("SELECT filterelements FROM tl_teaser WHERE pid=?" )->execute($dc->pid);
+	// 	$filter = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE pid=?" )->execute($dc->pid);
 	// 	// if($filter->numRows)
 	// 	// {
 	// 	// 	$filters = $filter->fetchAllAssoc();

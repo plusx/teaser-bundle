@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Contao Open Source CMS
  *
@@ -7,34 +6,20 @@
  *
  * @license LGPL-3.0+
  */
-
-// namespace Dehil;
-namespace Contao;
-
+namespace Dehil\Teaser;
+use Psr\Log\LogLevel;
+use Contao\CoreBundle\Monolog\ContaoContext;
 use Patchwork\Utf8;
 
-
-/**
- * Front end module "calendar".
- *
- * @property int    $cal_startDay
- * @property array  $cal_calendar
- * @property string $cal_ctemplate
- *
- * @author Leo Feyer <https://github.com/leofeyer>
- */
 class ModuleTeaserList extends \Module
 {
-
 	/**
 	 * Template
 	 * @var string
 	 */
 	protected $strTemplate = 'mod_teaserlist';
-
-
 	/**
-	 * Do not show the module if no calendar has been selected
+	 * Do not show the module if no category
 	 *
 	 * @return string
 	 */
@@ -44,13 +29,11 @@ class ModuleTeaserList extends \Module
 		{
 			/** @var BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
-
 			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaserlist'][0]) . ' ###';
 			$objTemplate->title = $this->title;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
 			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
-
 			return $objTemplate->parse();
 		}
 

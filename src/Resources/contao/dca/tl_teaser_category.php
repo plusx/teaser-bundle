@@ -3,18 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * Copyright (c) 2005-2017 Dennis Hilpmann
  *
  * @license LGPL-3.0+
  */
 
+/**
+* Load tl_content language file
+*/
+// System::loadLanguageFile('tl_content');
 
 /**
  * Table tl_calendar
  */
-$GLOBALS['TL_DCA']['tl_teaser'] = array
+$GLOBALS['TL_DCA']['tl_teaser_category'] = array
 (
-
 	// Config
 	'config' => array
 	(
@@ -24,7 +27,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		'enableVersioning'				=> true,
 		'onload_callback'				=> array
 		(
-			array('tl_teaser', 'checkPermission')
+			array('tl_teaser_category', 'checkPermission')
 		),
 		'sql' => array
 		(
@@ -64,35 +67,35 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		(
 			'edit' => array
 			(
-				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser']['edit'],
+				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser_category']['edit'],
 				'href'					=> 'table=tl_teaser_items',
 				'icon'					=> 'edit.svg'
 			),
 			'editheader' => array
 			(
-				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser']['editheader'],
+				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser_category']['editheader'],
 				'href'					=> 'act=edit',
 				'icon'					=> 'header.svg',
-				'button_callback'		=> array('tl_teaser', 'editHeader')
+				'button_callback'		=> array('tl_teaser_category', 'editHeader')
 			),
 			'copy' => array
 			(
-				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser']['copy'],
+				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser_category']['copy'],
 				'href'					=> 'act=copy',
 				'icon'					=> 'copy.svg',
-				'button_callback'		=> array('tl_teaser', 'copyTeaser')
+				'button_callback'		=> array('tl_teaser_category', 'copyCategory')
 			),
 			'delete' => array
 			(
-				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser']['delete'],
+				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser_category']['delete'],
 				'href'					=> 'act=delete',
 				'icon'					=> 'delete.svg',
 				'attributes'			=> 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
-				'button_callback'		=> array('tl_teaser', 'deleteTeaser')
+				'button_callback'		=> array('tl_teaser_category', 'deleteCategory')
 			),
 			'show' => array
 			(
-				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser']['show'],
+				'label'					=> &$GLOBALS['TL_LANG']['tl_teaser_category']['show'],
 				'href'					=> 'act=show',
 				'icon'					=> 'show.svg'
 			)
@@ -126,7 +129,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		),
 		'title' => array
 		(
-			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['title'],
+			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser_category']['title'],
 			'exclude'					=> true,
 			'search'					=> true,
 			'inputType'					=> 'text',
@@ -135,7 +138,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		),
 		'protected' => array
 		(
-			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['protected'],
+			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser_category']['protected'],
 			'exclude'					=> true,
 			'filter'					=> true,
 			'inputType'					=> 'checkbox',
@@ -144,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		),
 		'groups' => array
 		(
-			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['groups'],
+			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser_category']['groups'],
 			'exclude'					=> true,
 			'inputType'					=> 'checkbox',
 			'foreignKey'				=> 'tl_member_group.name',
@@ -154,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		),
 		'addFilter' => array
 		(
-			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['addFilter'],
+			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser_category']['addFilter'],
 			'exclude'					=> true,
 			'filter'					=> true,
 			'inputType'					=> 'checkbox',
@@ -163,7 +166,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
 		),
 		'filterelements' => array
 		(
-			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser']['filterelements'],
+			'label'						=> &$GLOBALS['TL_LANG']['tl_teaser_category']['filterelements'],
 			'exclude'					=> true,
 			'inputType'					=> 'listWizard',
 			'eval'						=> array('mandatory'=>true, 'allowHtml'=>false, 'helpwizard'=>false),
@@ -181,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_teaser'] = array
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class tl_teaser extends Backend
+class tl_teaser_category extends Backend
 {
 
 	/**
@@ -217,12 +220,12 @@ class tl_teaser extends Backend
 			$root = $this->User->teaser;
 		}
 
-		$GLOBALS['TL_DCA']['tl_teaser']['list']['sorting']['root'] = $root;
+		$GLOBALS['TL_DCA']['tl_teaser_category']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add calendars
 		if (!$this->User->hasAccess('create', 'teaserp'))
 		{
-			$GLOBALS['TL_DCA']['tl_teaser']['config']['closed'] = true;
+			$GLOBALS['TL_DCA']['tl_teaser_category']['config']['closed'] = true;
 		}
 
 		/** @var Symfony\Component\HttpFoundation\Session\SessionInterface $objSession */
@@ -245,7 +248,7 @@ class tl_teaser extends Backend
 
 					$arrNew = $objSessionBag->get('new_records');
 
-					if (is_array($arrNew['tl_teaser']) && in_array(Input::get('id'), $arrNew['tl_teaser']))
+					if (is_array($arrNew['tl_teaser_category']) && in_array(Input::get('id'), $arrNew['tl_teaser_category']))
 					{
 						// Add the permissions on group level
 						if ($this->User->inherit != 'custom')
@@ -340,7 +343,7 @@ class tl_teaser extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return $this->User->canEditFieldsOf('tl_teaser') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg/i', '_.svg', $icon)).' ';
+		return $this->User->canEditFieldsOf('tl_teaser_category') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg/i', '_.svg', $icon)).' ';
 	}
 
 
@@ -356,7 +359,7 @@ class tl_teaser extends Backend
 	 *
 	 * @return string
 	 */
-	public function copyTeaser($row, $href, $label, $title, $icon, $attributes)
+	public function copyCategory($row, $href, $label, $title, $icon, $attributes)
 	{
 		return $this->User->hasAccess('create', 'teaserp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg/i', '_.svg', $icon)).' ';
 	}
@@ -374,7 +377,7 @@ class tl_teaser extends Backend
 	 *
 	 * @return string
 	 */
-	public function deleteTeaser($row, $href, $label, $title, $icon, $attributes)
+	public function deleteCategory($row, $href, $label, $title, $icon, $attributes)
 	{
 		return $this->User->hasAccess('delete', 'teaserp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg/i', '_.svg', $icon)).' ';
 	}

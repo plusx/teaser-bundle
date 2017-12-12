@@ -1,5 +1,1 @@
-<?php
-	echo $this->helloworld;
-	echo 'hurz';
-?>
-<p>hurz purz</p>
+<?php echo $this->showTemplateVars(); ?>

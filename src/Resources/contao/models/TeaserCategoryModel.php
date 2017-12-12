@@ -8,11 +8,11 @@
  */
 namespace Dehil\Teaser;
 
-class TeaserItemsModel extends \Model
+class TeaserCategoryModel extends \Model
 {
 	/**
 	 * Table name
 	 * @var string
 	 */
-	protected static $strTable = 'tl_teaser_items';
+	protected static $strTable = 'tl_teaser_category';
 }

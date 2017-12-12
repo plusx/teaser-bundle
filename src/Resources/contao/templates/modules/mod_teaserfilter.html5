@@ -1,3 +1,1 @@
 <?php echo $this->showTemplateVars(); ?>
-<?php
-	echo 'filter';
