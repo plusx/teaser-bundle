@@ -37,21 +37,12 @@ class ModuleTeaserFilter extends \Module
 			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 			return $objTemplate->parse();
 		}
-		// $this->belegungsplan_category = \StringUtil::deserialize($this->belegungsplan_categories);
-		// $this->belegungsplan_month = \StringUtil::deserialize($this->belegungsplan_month);
-		// // aktuelle Seiten URL
-		// $this->strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 
-		// // Return if there are no categories
-		// if (!is_array($this->belegungsplan_category) || empty($this->belegungsplan_category))
-		// {
-		// 	return '';
-		// }
-		// // Return if there are no month
-		// if (!is_array($this->belegungsplan_month) || empty($this->belegungsplan_month))
-		// {
-		// 	return '';
-		// }
+		// Return if there are no categories
+		if (empty($this->teaserCategory))
+		{
+			return '';
+		}
 		return parent::generate();
 	}
 	/**
@@ -59,6 +50,9 @@ class ModuleTeaserFilter extends \Module
 	 */
 	protected function compile()
 	{
-
+		//get filters
+		$filterelements = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE id=?")->execute($this->teaserCategory)->filterelements;
+		$filterarray = \StringUtil::deserialize($filterelements);
+		$this->Template->optionsarray = $filterarray;
 	}
 }

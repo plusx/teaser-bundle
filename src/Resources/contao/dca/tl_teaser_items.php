@@ -45,9 +45,10 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'sorting' => array
 		(
 			'mode'                    => 4,
-			'fields'                  => array('id DESC'),
-			'headerFields'            => array('title', 'protected', 'filterelements'),
-			'panelLayout'             => 'filter;sort,search,limit',
+			'disableGrouping'         => true,
+			'fields'                  => array('id DESC',),
+			'headerFields'            => array('title'),
+			'panelLayout'             => 'limit',
 			'child_record_callback'   => array('tl_teaser_items', 'listTeaseritems')
 		),
 		'global_operations' => array
@@ -107,7 +108,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('teaserType'),
-		'default'                     => '{type_legend},teaserType',
+		'default'                     => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop',
 		'link'                        => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop',
 		'download'                    => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop',
 		'video'                       => '{type_legend},teaserType;{teaser_legend},headline,singleSRC,subHeadline,teaserItemText;{filter_legend:hide},availableFilter;{publish_legend},published,start,stop'
@@ -141,16 +142,16 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'teaserType' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserType'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'inputType'               => 'select',
 			'options'                 => array('link', 'download', 'video'),
-			'eval'                    => array('includeBlankOption'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(12) NOT NULL default ''",
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['jumpTo'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
@@ -160,29 +161,15 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'linkText' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['linkText'],
-			'exclude'                 => true,
-			'search'                  => true,
+			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'mandatory'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'fileSRC' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['fileSRC'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
-			'load_callback'           => array
-			(
-			    array('tl_teaser_items', 'setSingleSrcFlags'),
-			),
-			'sql'                     => "binary(16) NULL",
-		),
 		'youtube' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['youtube'],
-			'exclude'                 => true,
-			'search'                  => true,
+			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'save_callback' => array
@@ -194,16 +181,27 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'headline' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserHeadline'],
-			'exclude'                 => true,
-			'search'                  => true,
+			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'fileSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['fileSRC'],
+			'exclude'                 => false,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
+			'load_callback'           => array
+			(
+			    array('tl_teaser_items', 'setSingleSrcFlags'),
+			),
+			'sql'                     => "binary(16) NULL",
+		),
 		'singleSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['singleSRC'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr', 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
 			'load_callback' => array
@@ -215,43 +213,33 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'subHeadline' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserSubHeadline'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50 clr'),
+			'eval'                    => array('mandatory'=>false, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'teaserItemText' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['teaserItemText'],
-			'exclude'                 => true,
-			'search'                  => true,
+			'exclude'                 => false,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>false, 'style'=>'min-height:150px;resize:vertical;', 'tl_class'=>'w50 clr'),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'style'=>'min-height:150px;resize:vertical;', 'tl_class'=>'w50 clr'),
 			'sql'                     => "mediumtext NULL"
 		),
 		'availableFilter' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['availableFilter'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_teaser_items', 'getAvailableFilter'),
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL",
 		),
-		'applyFilter' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['applyFilter'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
 		'published' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['published'],
-			'exclude'                 => true,
-			'filter'                  => true,
+			'exclude'                 => false,
 			'flag'                    => 2,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true),
@@ -260,7 +248,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'start' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['start'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(10) NOT NULL default ''"
@@ -268,7 +256,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['stop'],
-			'exclude'                 => true,
+			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(10) NOT NULL default ''"
@@ -294,6 +282,66 @@ class tl_teaser_items extends Backend
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Add the source options depending on the allowed fields (see #5498)
+	 *
+	 * @param DataContainer $dc
+	 *
+	 * @return array
+	 */
+	public function getSourceOptions(DataContainer $dc)
+	{
+		// if ($this->User->isAdmin)
+		// {
+			return array('link', 'download', 'video');
+		// }
+	}
+
+	/**
+	 * Return all filter elements as array
+	 *
+	 * @return array
+	 */
+	// public function getgetAvailableFilter(DataContainer $dc)
+	// {
+	// $arrOptions = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE id=?")
+	//                              ->limit(1)
+	//                              ->execute($dc->pid)
+	//                              ->filterelements;
+	// 	return $arrOptions;
+	// }
+	public function getAvailableFilter(DataContainer $dc)
+	{
+		//get filters
+		$filterelements = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE id=?")->execute($dc->activeRecord->pid)->filterelements;
+		$filterarray = \StringUtil::deserialize($filterelements);
+		return $filterarray;
+	}
+
+	/**
+	 * Extract the YouTube ID from an URL
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
+	 * @return mixed
+	 */
+	public function extractYouTubeId($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord->singleSRC != $varValue)
+		{
+			$matches = array();
+
+			if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $varValue, $matches))
+			{
+				$varValue = $matches[1];
+			}
+		}
+
+		return $varValue;
 	}
 
 
@@ -404,73 +452,6 @@ class tl_teaser_items extends Backend
 		}
 	}
 
-	/**
-	 * Add the source options depending on the allowed fields (see #5498)
-	 *
-	 * @param DataContainer $dc
-	 *
-	 * @return array
-	 */
-	public function getSourceOptions(DataContainer $dc)
-	{
-		// if ($this->User->isAdmin)
-		// {
-			return array('link', 'download', 'video');
-		// }
-	}
-
-	/**
-	 * Return all filter elements as array
-	 *
-	 * @return array
-	 */
-	public function getAvailableFilter(DataContainer $dc)
-	{
-		$arrOptions = array('page', 'file', 'download', 'article', 'external');
-
-		return $arrOptions;
-	}
-	// public function getAvailableFilter(DataContainer $dc)
-	// {
-	// 	$filter = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE pid=?" )->execute($dc->pid);
-	// 	// if($filter->numRows)
-	// 	// {
-	// 	// 	$filters = $filter->fetchAllAssoc();
-	// 	// }
-	// 	// print_r($filters);
-	// 	// $data = json_decode($filters[0]['rsce_data']);
-	// 	// foreach ($data->filterelemente as $value) {
-	// 	// 	$filterarray[preg_replace('/\W+/','',strtolower(strip_tags($value->text)))] = $value->text;
-	// 	// }
-	// 	// $filters =  array('hurz', 'purz', 'furz');
-	// 	// return $filters;
-	// 	// return array('hurz', 'purz', 'furz');
-	// 	$varValue = deserialize($filter, true);
-	// 	return $varValue;
-	// }
-
-	/**
-	 * Extract the YouTube ID from an URL
-	 *
-	 * @param mixed         $varValue
-	 * @param DataContainer $dc
-	 *
-	 * @return mixed
-	 */
-	public function extractYouTubeId($varValue, DataContainer $dc)
-	{
-		if ($dc->activeRecord->singleSRC != $varValue)
-		{
-			$matches = array();
-
-			if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $varValue, $matches))
-			{
-				$varValue = $matches[1];
-			}
-		}
-
-		return $varValue;
-	}
 
 	/**
 	 * Automatically set the end time if not set
@@ -527,13 +508,38 @@ class tl_teaser_items extends Backend
 	 *
 	 * @return string
 	 */
-	public function listTeaseritems($arrRow)
+	public function listTeaserheader($arrRow)
 	{
+		$objReturn = '<div class="teaseritemHeader"><ul>';
+		$objReturn .= '<li>Teasertype: ' . $arrRow['teaserType'] . '</li>';
+		// $objReturn .= '<li>Teasertype: ' . $arrRow['jumpTo'] . '</li>';
+		$objReturn .= '</ul></div>';
+		// $arrRow['singleSRC']
 		// $imagepath = $this->Database->prepare("SELECT path FROM tl_files WHERE tl_files.uuid = ?")->execute($arrRow['singleSRC'])->path;
 		// $image = $this->generateImage($this->getImage($imagepath, 100, 60, 'center_center'), $arrRow['title']);
 		// $date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
 		// return '<div class="teaseritemDescription">' . $image . '<div class="teaseitemInfo"><strong>Title:</strong> ' . $arrRow['title'] . '<br><strong>Type:</strong> ' . $arrRow['type'] . '</div></div>';
-		return print_r($arrRow);
+		return $objReturn;
+	}
+
+	/**
+	 * Add the type of input field
+	 *
+	 * @param array $arrRow
+	 *
+	 * @return string
+	 */
+	public function listTeaseritems($arrRow)
+	{
+		$objReturn = '<div class="teaseritemDescription">';
+		$objReturn .= '<img src="' . \FilesModel::findByUuid($arrRow['singleSRC'])->path . '" itemprop="image">';
+		$objReturn .= '</div>';
+		// $arrRow['singleSRC']
+		// $imagepath = $this->Database->prepare("SELECT path FROM tl_files WHERE tl_files.uuid = ?")->execute($arrRow['singleSRC'])->path;
+		// $image = $this->generateImage($this->getImage($imagepath, 100, 60, 'center_center'), $arrRow['title']);
+		// $date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
+		// return '<div class="teaseritemDescription">' . $image . '<div class="teaseitemInfo"><strong>Title:</strong> ' . $arrRow['title'] . '<br><strong>Type:</strong> ' . $arrRow['type'] . '</div></div>';
+		return $objReturn;
 	}
 
 	/**

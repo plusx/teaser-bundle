@@ -1,1 +1,30 @@
-<p>teaserlist</p>
+		<?php foreach($this->teaserarray as $teaser): ?>
+		<div class="teaser col-xs-12 col-sm-4 <?= $teaser['filter']; ?>">
+			<div class="inside">
+				<h2><?= $teaser['headline']; ?></h2>
+
+				<figure class="image_container" itemscope="" itemtype="http://schema.org/ImageObject">
+					<?php if ($teaser['teaserType'] == 'video'): ?>
+						<a href="//www.youtube.com/watch?v=<?= $teaser['youtube'];?>" data-lity>
+					<?php endif; ?>
+					<img src="<?= $teaser['teaserImage']; ?>" itemprop="image">
+					<?php if ($teaser['teaserType'] == 'video'): ?>
+						</a>
+					<?php endif; ?>
+				</figure>
+				<div class="teasertext">
+					<?php if ($teaser['subHeadline']): ?>
+					<strong><?= $teaser['subHeadline']; ?></strong>
+					<?php endif; ?>
+					<?= $teaser['teaserText']; ?>
+				</div>
+				<div class="teaserlink">
+					<?php if ($teaser['teaserType'] == 'link'): ?>
+					<a class="more" href="<?= $teaser['link']; ?>"><?= $teaser['linkText']; ?></a>
+					<?php else: ?>
+					<a class="more" href="<?= $teaser['href']; ?>"><?= $teaser['title']; ?></a>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+		<?php endforeach; ?>

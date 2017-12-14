@@ -1,1 +1,6 @@
 /* Styles */
+.teaseritemDescription img {
+	max-width: 200px;
+	float: left;
+	margin-right: 30px;
+}

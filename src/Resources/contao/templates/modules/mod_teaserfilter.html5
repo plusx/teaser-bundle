@@ -1,1 +1,15 @@
-<p>Filter</p>
+		<div class="col-xs-12 col-sm-4">
+			<h1 class="ph4">Marketing</h1>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-sm-offset-4 filter pt2">
+			<select name="category">
+				<option value="*">Show all</option>
+				<?php foreach ($this->optionsarray as $option): ?>
+				<option value=".<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div id="grid" class="row filter">
