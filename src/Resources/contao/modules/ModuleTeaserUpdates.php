@@ -17,7 +17,7 @@ class ModuleTeaserFilter extends \Module
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_teaserfilter';
+	protected $strTemplate = 'mod_teaserupdates';
 
 	/**
 	 * Do not show the module if no category
@@ -30,7 +30,7 @@ class ModuleTeaserFilter extends \Module
 		{
 			/** @var BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
-			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaserfilter'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['teaserupdates'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -50,9 +50,11 @@ class ModuleTeaserFilter extends \Module
 	 */
 	protected function compile()
 	{
-		$teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY id DESC")->execute($this->teaserCategory);
-		// create array with all published teaser
-		$i = 0;
+
+
+		// get newest teaser from database
+		$teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY id DESC limit 3")->execute($this->teaserCategory);
+
 		while($teaser->next())
 		{
 			$current = $teaser->row();
@@ -62,20 +64,13 @@ class ModuleTeaserFilter extends \Module
 				$stop = ($current['stop'] ?: time());
 				if ($start <= ($now = time()) && $now <= $stop)
 				{
-					if(\StringUtil::deserialize($current['availableFilter'])) {
-						$filtersarray = \StringUtil::deserialize($current['availableFilter']);
-						foreach ($filtersarray as $filter) {
- 							$filterset[] = $filter;
-						}
-					}
-					$i++;
+					$updates[] = $current;
 				}
 			}
 		}
-		$filterset = array_unique($filterset);
-		$filterelements = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE id=?")->execute($this->teaserCategory)->filterelements;
-		$filterarray = \StringUtil::deserialize($filterelements);
-		$filterarray = array_intersect($filterarray, $filterset);
-		$this->Template->optionsarray = $filterarray;
+
+		//parse updates to template
+		$this->Template->updates = $updates;
+
 	}
 }

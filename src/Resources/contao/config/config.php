@@ -25,7 +25,8 @@ array_insert($GLOBALS['FE_MOD'], 99, array
 	'teaser' => array
 	(
 		'teaserlist'		=> 'Dehil\Teaser\ModuleTeaserList',
-		'teaserfilter'		=> 'Dehil\Teaser\ModuleTeaserFilter'
+		'teaserfilter'		=> 'Dehil\Teaser\ModuleTeaserFilter',
+		'teaserupdate'		=> 'Dehil\Teaser\ModuleTeaserUpdate'
 	)
 ));
 /**
@@ -33,17 +34,17 @@ array_insert($GLOBALS['FE_MOD'], 99, array
  */
 if (TL_MODE == 'BE')
 {
-	$GLOBALS['TL_CSS'][] = 'bundles/dehilteaserbundle/backend.css|static';
+	$GLOBALS['TL_CSS'][] = 'bundles/dehilteaser/backend.css|static';
 }
 /**
 * Style sheet Frontend
 */
-if (TL_MODE == 'FE')
-{
-	$GLOBALS['TL_CSS'][] = 'bundles/dehilteaserbundle/frontend.css|static';
-}
+// if (TL_MODE == 'FE')
+// {
+// 	$GLOBALS['TL_CSS'][] = 'bundles/dehilteaser/frontend.css|static';
+// }
 /**
  * Add permissions
  */
-$GLOBALS['TL_PERMISSIONS'][] = 'teasers';
-$GLOBALS['TL_PERMISSIONS'][] = 'teaserp';
+// $GLOBALS['TL_PERMISSIONS'][] = 'teasers';
+// $GLOBALS['TL_PERMISSIONS'][] = 'teaserp';

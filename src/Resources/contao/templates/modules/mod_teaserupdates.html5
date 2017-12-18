@@ -1,0 +1,14 @@
+<div class="teaser col-xs-12 col-sm-4 newsbox">
+	<div class="inside">
+		<h2>Updates</h2>
+		<?php
+			for($i = 0; $i < count($updates); $i++)
+			{
+				$date = $this->parseDate('m/d/Y', $updates[$i]['tstamp']);
+				$text = strip_tags(StringUtil::substrHtml($updates[$i]['text'], 128), '<strong>') . ' ...';
+				$link = 'en/marketing/id/' . $updates[$i]['id'];
+				echo '<a href="' . $link . '"><div class="newsitem"><span class="date">' . $date . '</span><div class="text">' . $text . '</div></div></a>';
+			}
+		?>
+	</div>
+</div>

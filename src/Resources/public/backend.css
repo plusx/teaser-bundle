@@ -4,3 +4,13 @@
 	float: left;
 	margin-right: 30px;
 }
+.teaseritemDescription ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+.teaseritemDescription h2 {
+	color: #E5310E;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+}

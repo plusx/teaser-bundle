@@ -45,7 +45,7 @@ class ModuleTeaserList extends \ContentElement
 	 */
 	protected function compile()
 	{
-		//get filters
+		//get teaser
 		$teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY id DESC")->execute($this->teaserCategory);
 
 

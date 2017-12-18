@@ -8,8 +8,7 @@
  */
 /**
  * Load tl_content language file
- */
-// System::loadLanguageFile('tl_content');
+ teaser  // System::loadLanguageFile('tl_content');
 
 /**
  * Table tl_teaser_items
@@ -24,10 +23,10 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		'ptable'                      => 'tl_teaser_category',
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
-		'onload_callback' => array
-		(
-			array('tl_teaser_items', 'checkPermission')
-		),
+		// 'onload_callback'             => array
+		// (
+		// 	array('tl_teaser_items', 'checkPermission')
+		// ),
 		'sql' => array
 		(
 			'keys' => array
@@ -145,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 			'exclude'                 => false,
 			'inputType'               => 'select',
 			'options'                 => array('link', 'download', 'video'),
-			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true,'submitOnChange'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(12) NOT NULL default ''",
 		),
 		'jumpTo' => array
@@ -360,13 +359,13 @@ class tl_teaser_items extends Backend
 		}
 
 		// Set root IDs
-		if (!is_array($this->User->teasers) || empty($this->User->teasers))
+		if (!is_array($this->User->teaser) || empty($this->User->teaser))
 		{
 			$root = array(0);
 		}
 		else
 		{
-			$root = $this->User->teasers;
+			$root = $this->User->teaser;
 		}
 
 		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
@@ -501,26 +500,7 @@ class tl_teaser_items extends Backend
 		return $varValue;
 	}
 
-	/**
-	 * Add the type of input field
-	 *
-	 * @param array $arrRow
-	 *
-	 * @return string
-	 */
-	public function listTeaserheader($arrRow)
-	{
-		$objReturn = '<div class="teaseritemHeader"><ul>';
-		$objReturn .= '<li>Teasertype: ' . $arrRow['teaserType'] . '</li>';
-		// $objReturn .= '<li>Teasertype: ' . $arrRow['jumpTo'] . '</li>';
-		$objReturn .= '</ul></div>';
-		// $arrRow['singleSRC']
-		// $imagepath = $this->Database->prepare("SELECT path FROM tl_files WHERE tl_files.uuid = ?")->execute($arrRow['singleSRC'])->path;
-		// $image = $this->generateImage($this->getImage($imagepath, 100, 60, 'center_center'), $arrRow['title']);
-		// $date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
-		// return '<div class="teaseritemDescription">' . $image . '<div class="teaseitemInfo"><strong>Title:</strong> ' . $arrRow['title'] . '<br><strong>Type:</strong> ' . $arrRow['type'] . '</div></div>';
-		return $objReturn;
-	}
+
 
 	/**
 	 * Add the type of input field
@@ -533,85 +513,9 @@ class tl_teaser_items extends Backend
 	{
 		$objReturn = '<div class="teaseritemDescription">';
 		$objReturn .= '<img src="' . \FilesModel::findByUuid($arrRow['singleSRC'])->path . '" itemprop="image">';
+		$objReturn .= '<ul><li><h2>' . $arrRow['headline'] . '</h2></li><li><strong>' . $arrRow['subHeadline'] . '</strong></li><li>' . nl2br($arrRow['teaserItemText']) . '</li></ul>';
 		$objReturn .= '</div>';
-		// $arrRow['singleSRC']
-		// $imagepath = $this->Database->prepare("SELECT path FROM tl_files WHERE tl_files.uuid = ?")->execute($arrRow['singleSRC'])->path;
-		// $image = $this->generateImage($this->getImage($imagepath, 100, 60, 'center_center'), $arrRow['title']);
-		// $date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
-		// return '<div class="teaseritemDescription">' . $image . '<div class="teaseitemInfo"><strong>Title:</strong> ' . $arrRow['title'] . '<br><strong>Type:</strong> ' . $arrRow['type'] . '</div></div>';
 		return $objReturn;
-	}
-
-	/**
-	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 *
-	 * @param DataContainer $dc
-	 */
-	public function adjustTime(DataContainer $dc)
-	{
-		// Return if there is no active record (override all)
-		if (!$dc->activeRecord)
-		{
-			return;
-		}
-
-		$arrSet['startTime'] = $dc->activeRecord->startDate;
-		$arrSet['endTime'] = $dc->activeRecord->startDate;
-
-		// Set end date
-		if (strlen($dc->activeRecord->endDate))
-		{
-			if ($dc->activeRecord->endDate > $dc->activeRecord->startDate)
-			{
-				$arrSet['endDate'] = $dc->activeRecord->endDate;
-				$arrSet['endTime'] = $dc->activeRecord->endDate;
-			}
-			else
-			{
-				$arrSet['endDate'] = $dc->activeRecord->startDate;
-				$arrSet['endTime'] = $dc->activeRecord->startDate;
-			}
-		}
-
-		// Add time
-		if ($dc->activeRecord->addTime)
-		{
-			$arrSet['startTime'] = strtotime(date('Y-m-d', $arrSet['startTime']) . ' ' . date('H:i:s', $dc->activeRecord->startTime));
-			$arrSet['endTime'] = strtotime(date('Y-m-d', $arrSet['endTime']) . ' ' . date('H:i:s', $dc->activeRecord->endTime));
-		}
-
-		// Adjust end time of "all day" events
-		elseif ((strlen($dc->activeRecord->endDate) && $arrSet['endDate'] == $arrSet['endTime']) || $arrSet['startTime'] == $arrSet['endTime'])
-		{
-			$arrSet['endTime'] = (strtotime('+ 1 day', $arrSet['endTime']) - 1);
-		}
-
-		$arrSet['repeatEnd'] = 0;
-
-		// Recurring events
-		if ($dc->activeRecord->recurring)
-		{
-			// Unlimited recurrences end on 2038-01-01 00:00:00 (see #4862)
-			if ($dc->activeRecord->recurrences == 0)
-			{
-				$arrSet['repeatEnd'] = 2145913200;
-			}
-			else
-			{
-				$arrRange = StringUtil::deserialize($dc->activeRecord->repeatEach);
-
-				if (is_array($arrRange) && isset($arrRange['unit']) && isset($arrRange['value']))
-				{
-					$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
-					$unit = $arrRange['unit'];
-
-					$strtotime = '+ ' . $arg . ' ' . $unit;
-					$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
-				}
-			}
-		}
-
-		$this->Database->prepare("UPDATE tl_teaser_items %s WHERE id=?")->set($arrSet)->execute($dc->id);
 	}
 
 	/**

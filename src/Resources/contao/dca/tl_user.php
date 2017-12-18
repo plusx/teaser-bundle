@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['teasers'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['teasers'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'foreignKey'              => 'tl_teaser.title',
+	'foreignKey'              => 'tl_teaser_category.title',
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "blob NULL"
 );
