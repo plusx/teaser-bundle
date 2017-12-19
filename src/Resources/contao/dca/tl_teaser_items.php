@@ -8,7 +8,8 @@
  */
 /**
  * Load tl_content language file
- teaser  // System::loadLanguageFile('tl_content');
+*/
+ System::loadLanguageFile('tl_content');
 
 /**
  * Table tl_teaser_items
@@ -246,7 +247,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'start' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['start'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['start'],
 			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -254,7 +255,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
 		),
 		'stop' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['stop'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['stop'],
 			'exclude'                 => false,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),

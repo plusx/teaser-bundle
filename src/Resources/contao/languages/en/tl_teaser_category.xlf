@@ -1,105 +1,80 @@
 <?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/de/tl_teaser_category.php" source-language="en" target-language="de">
+  <file datatype="php" original="src/Resources/contao/languages/de/tl_teaser_category.php" source-language="en">
     <body>
       <trans-unit id="tl_teaser_category.title.0">
         <source>Teaser Modul</source>
-        <target>Teaser Modul</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.title.1">
         <source>Manage teasers</source>
-        <target>Teaser verwalten</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.protected.0">
         <source>Protected</source>
-        <target>Zugriffsschutz</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.protected.1">
         <source>Only show to group.</source>
-        <target>Das Inhaltselement nur bestimmten Gruppen anzeigen.</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.groups.0">
         <source>Allowed Groups</source>
-        <target>Erlaubte Mitgliedergruppen</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.groups.1">
         <source>This groups coud see the Element</source>
-        <target>Diese Gruppen können das Inhaltselement sehen.</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.addFilter.0">
         <source>Add Filter</source>
-        <target>Filter hinzufügen</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.addFilter.1">
         <source>Choose Filter</source>
-        <target>Fügen sie Filter hinzu</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.filterelements.0">
         <source>Available Filter Options</source>
-        <target>Verfügbare Filter</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.filterelements.1">
         <source>Add Filter Options.</source>
-        <target>Fügen sie Filter Elemente hinzu.</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.title_legend">
         <source>Title</source>
-        <target>Titel</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.filter_legend">
         <source>Filter</source>
-        <target>Filter</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.protected_legend">
         <source>Protected</source>
-        <target>Zugriffsschutz</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.new.0">
         <source>New Category</source>
-        <target>Neue Kategorie</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.new.1">
         <source>Add a new Category</source>
-        <target>Neue Kategorie hinzufügen</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.edit.0">
         <source>Edit Category</source>
-        <target>Kategorie bearbeiten</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.edit.1">
         <source>Edit category ID %s</source>
-        <target>Kategorie ID %s bearbeiten</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.editheader.0">
         <source>Category Settings</source>
-        <target>Kategorie Eigenschaften</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.editheader.1">
         <source>Category Settings ID %s</source>
-        <target>Kategorie Eigenschaften ID %s</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.copy.0">
         <source>Copy Category</source>
-        <target>Kategorie kopieren</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.copy.1">
         <source>Copy Category ID %s</source>
-        <target>Kategorie kopieren ID %s</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.delete.0">
         <source>Delete category</source>
-        <target>Kategorie löschen</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.delete.1">
         <source>Delete category ID %s</source>
-        <target>Kategorie ID %s löschen</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.show.0">
         <source>Show teaser details</source>
-        <target>Die Details des Teasers anzeigen</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.show.1">
         <source>Show teaser details ID %s</source>
-        <target>Die Details des Teasers ID %s anzeigen</target>
       </trans-unit>
     </body>
   </file>

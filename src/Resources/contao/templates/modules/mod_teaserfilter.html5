@@ -2,13 +2,22 @@
 			<h1 class="ph4">Marketing</h1>
 		</div>
 		<div class="col-xs-12 col-sm-4 col-sm-offset-4 filter pt2">
-			<p><?= $this->filterId; ?></p>
-			<select name="category">
-				<option value="*">Show all</option>
-				<?php foreach ($this->optionsarray as $option): ?>
-				<option value=".<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
-				<?php endforeach ?>
-			</select>
+			<?php if ($this->filterId): ?>
+				<select name="category">
+					<option value="*">Show all</option>
+					<option value=".<?= $this->filterId; ?>" selected><?= $this->currentSelected; ?></option>
+					<?php foreach ($this->optionsarray as $option): ?>
+					<option value=".<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
+					<?php endforeach ?>
+				</select>
+			<?php else: ?>
+				<select name="category">
+					<option value="*">Show all</option>
+					<?php foreach ($this->optionsarray as $option): ?>
+					<option value=".<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
+					<?php endforeach ?>
+				</select>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

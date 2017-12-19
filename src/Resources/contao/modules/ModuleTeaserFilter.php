@@ -38,8 +38,15 @@ class ModuleTeaserFilter extends \Module
 			return $objTemplate->parse();
 		}
 
+		$file = \Input::get('file', true);
+
+		// Send the file to the browser and do not send a 404 header (see #4632)
+		if ($file != '')
+		{
+			\Controller::sendFileToBrowser($file);
+		}
+
 		\Input::setGet('id', \Input::get('id'));
-		$filterId = \Input::get('id');
 
 		// Return if there are no categories
 		if (empty($this->teaserCategory))
@@ -67,11 +74,16 @@ class ModuleTeaserFilter extends \Module
 				{
 					if(\StringUtil::deserialize($current['availableFilter'])) {
 						$filtersarray = \StringUtil::deserialize($current['availableFilter']);
-						foreach ($filtersarray as $filter) {
+						foreach ($filtersarray as $filter)
+						{
  							$filterset[] = $filter;
 						}
-					}
+						if(\Input::get('id') && $current['id'] === \Input::get('id'))
+						{
+							$currentSelected = $current['subHeadline'];
+						}
 					$i++;
+					}
 				}
 			}
 		}
@@ -80,6 +92,10 @@ class ModuleTeaserFilter extends \Module
 		$filterarray = \StringUtil::deserialize($filterelements);
 		$filterarray = array_intersect($filterarray, $filterset);
 		$this->Template->optionsarray = $filterarray;
-		$this->Template->filterId = $filterId;
+		if(\Input::get('id', true))
+		{
+			$this->Template->filterId = \Input::get('id', true);
+			$this->Template->currentSelected = $currentSelected;
+		}
 	}
 }

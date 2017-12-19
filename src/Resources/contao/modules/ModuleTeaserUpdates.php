@@ -65,7 +65,7 @@ class ModuleTeaserUpdates extends \Module
 				if ($start <= ($now = time()) && $now <= $stop)
 				{
 					$pageModel = \PageModel::findByPK($this->jumpTo);
-					$url = \Controller::generateFrontendUrl($pageModel->row(),'/id/' . $current['id'] . '/');
+					$url = \Controller::generateFrontendUrl($pageModel->row(),'/id/' . $current['id']);
 					$updates[$i]['id'] = $current['id'];
 					$updates[$i]['tstamp'] = $current['tstamp'];
 					$updates[$i]['teaserItemText'] = $current['teaserItemText'];
