@@ -1,3 +1,4 @@
+<?php echo $this->showTemplateVars(); ?>
 <div class="teaser col-xs-12 col-sm-4 newsbox">
 	<div class="inside">
 		<h2>Updates</h2>

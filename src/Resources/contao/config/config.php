@@ -26,7 +26,7 @@ array_insert($GLOBALS['FE_MOD'], 99, array
 	(
 		'teaserlist'		=> 'Dehil\Teaser\ModuleTeaserList',
 		'teaserfilter'		=> 'Dehil\Teaser\ModuleTeaserFilter',
-		'teaserupdate'		=> 'Dehil\Teaser\ModuleTeaserUpdate'
+		'teaserupdate'		=> 'Dehil\Teaser\ModuleTeaserUpdates'
 	)
 ));
 /**

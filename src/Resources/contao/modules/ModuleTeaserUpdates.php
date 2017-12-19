@@ -11,7 +11,7 @@ use Psr\Log\LogLevel;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Patchwork\Utf8;
 
-class ModuleTeaserFilter extends \Module
+class ModuleTeaserUpdates extends \Module
 {
 	/**
 	 * Template
@@ -71,6 +71,5 @@ class ModuleTeaserFilter extends \Module
 
 		//parse updates to template
 		$this->Template->updates = $updates;
-
 	}
 }
