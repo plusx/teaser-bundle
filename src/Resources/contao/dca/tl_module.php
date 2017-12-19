@@ -13,7 +13,7 @@
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserupdate']    = '{title_legend},name,headline,type;{config_legend},teaserCategory,jumpTo;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserupdates']    = '{title_legend},name,headline,type;{config_legend},teaserCategory,jumpTo;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 /**
 * Add fields to tl_module
 */
