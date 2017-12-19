@@ -38,6 +38,9 @@ class ModuleTeaserFilter extends \Module
 			return $objTemplate->parse();
 		}
 
+		\Input::setGet('id', \Input::get('id'));
+		$filterId = \Input::get('id');
+
 		// Return if there are no categories
 		if (empty($this->teaserCategory))
 		{
@@ -77,5 +80,6 @@ class ModuleTeaserFilter extends \Module
 		$filterarray = \StringUtil::deserialize($filterelements);
 		$filterarray = array_intersect($filterarray, $filterset);
 		$this->Template->optionsarray = $filterarray;
+		$this->Template->filterId = $filterId;
 	}
 }

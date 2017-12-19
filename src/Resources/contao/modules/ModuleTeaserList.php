@@ -63,7 +63,6 @@ class ModuleTeaserList extends \ContentElement
 					if($current['teaserType'] == 'download' || $current['teaserType'] == 'video')
 					{
 						$objFile = new \File(\FilesModel::findByUuid($current['fileSRC'])->path);
-						$file = new \File('files/ics/event.ics');
 
 						// Remove an existing file parameter (see #5683)
 						$strHref = \Environment::get('request');
@@ -73,6 +72,7 @@ class ModuleTeaserList extends \ContentElement
 						}
 						$strHref .= (strpos($strHref, '?') !== false ? '&amp;' : '?') . 'file=' . $objFile->path;
 						$filesize = $this->getReadableSize($objFile->filesize, 1);
+						$teaserarray[$i]['id'] 					= $current['id'];
 						$teaserarray[$i]['title']				= 'Download (' . $filesize . ')';
 						$teaserarray[$i]['href']				= $strHref;
 						$teaserarray[$i]['filesize']			= $filesize;

@@ -13,7 +13,7 @@
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserupdate']    = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserupdate']    = '{title_legend},name,headline,type;{config_legend},teaserCategory,jumpTo;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 /**
 * Add fields to tl_module
 */
@@ -25,6 +25,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['teaserCategory'] = array
 	'options_callback'        => array('tl_module_teaser', 'getTeaserCategory'),
 	'eval'                    => array('mandatory'=>true),
 	'sql'                     => "blob NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['jumpTo'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['jumpTo'],
+	'exclude'                 => false,
+	'inputType'               => 'pageTree',
+	'foreignKey'              => 'tl_page.title',
+	'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'",
+	'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 );
 
 class tl_module_teaser extends Backend

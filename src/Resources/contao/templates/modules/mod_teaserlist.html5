@@ -1,5 +1,5 @@
 		<?php foreach($this->teaserarray as $teaser): ?>
-		<div class="teaser col-xs-12 col-sm-4 <?= $teaser['filter']; ?>">
+		<div class="teaser col-xs-12 col-sm-4 <?= $teaser['filter']; ?><?= $teaser['id']; ?>">
 			<div class="inside">
 				<h2><?= $teaser['headline']; ?></h2>
 

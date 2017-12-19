@@ -54,7 +54,7 @@ class ModuleTeaserUpdates extends \Module
 
 		// get newest teaser from database
 		$teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY id DESC limit 3")->execute($this->teaserCategory);
-
+		$i = 0;
 		while($teaser->next())
 		{
 			$current = $teaser->row();
@@ -64,7 +64,13 @@ class ModuleTeaserUpdates extends \Module
 				$stop = ($current['stop'] ?: time());
 				if ($start <= ($now = time()) && $now <= $stop)
 				{
-					$updates[] = $current;
+					$pageModel = \PageModel::findByPK($this->jumpTo);
+					$url = \Controller::generateFrontendUrl($pageModel->row(),'/id/' . $current['id'] . '/');
+					$updates[$i]['id'] = $current['id'];
+					$updates[$i]['tstamp'] = $current['tstamp'];
+					$updates[$i]['teaserItemText'] = $current['teaserItemText'];
+					$updates[$i]['url'] = $url;
+					$i++;
 				}
 			}
 		}
