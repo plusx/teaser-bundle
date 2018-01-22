@@ -37,14 +37,7 @@ if (TL_MODE == 'BE')
 	$GLOBALS['TL_CSS'][] = 'bundles/dehilteaser/backend.css|static';
 }
 /**
-* Style sheet Frontend
-*/
-// if (TL_MODE == 'FE')
-// {
-// 	$GLOBALS['TL_CSS'][] = 'bundles/dehilteaser/frontend.css|static';
-// }
-/**
  * Add permissions
  */
-// $GLOBALS['TL_PERMISSIONS'][] = 'teasers';
-// $GLOBALS['TL_PERMISSIONS'][] = 'teaserp';
+$GLOBALS['TL_PERMISSIONS'][] = 'teasers';
+$GLOBALS['TL_PERMISSIONS'][] = 'teaserp';
