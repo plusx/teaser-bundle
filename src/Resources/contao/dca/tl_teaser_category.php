@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
         'title' => array
         (
             'label'                     => &$GLOBALS['TL_LANG']['tl_teaser_category']['title'],
-            'exclude'                   => false,
+            'exclude'                   => true,
             'search'                    => true,
             'inputType'                 => 'text',
             'eval'                      => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
@@ -139,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
         'protected' => array
         (
             'label'                     => &$GLOBALS['TL_LANG']['tl_teaser_category']['protected'],
-            'exclude'                   => false,
+            'exclude'                   => true,
             'filter'                    => true,
             'inputType'                 => 'checkbox',
             'eval'                      => array('submitOnChange'=>true),
@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
         'groups' => array
         (
             'label'                     => &$GLOBALS['TL_LANG']['tl_teaser_category']['groups'],
-            'exclude'                   => false,
+            'exclude'                   => true,
             'inputType'                 => 'checkbox',
             'foreignKey'                => 'tl_member_group.name',
             'eval'                      => array('mandatory'=>true, 'multiple'=>true),
@@ -158,7 +158,7 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
         'addFilter' => array
         (
             'label'                     => &$GLOBALS['TL_LANG']['tl_teaser_category']['addFilter'],
-            'exclude'                   => false,
+            'exclude'                   => true,
             'filter'                    => true,
             'inputType'                 => 'checkbox',
             'eval'                      => array('submitOnChange'=>true),
@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
         'filterelements' => array
         (
             'label'                     => &$GLOBALS['TL_LANG']['tl_teaser_category']['filterelements'],
-            'exclude'                   => false,
+            'exclude'                   => true,
             'inputType'                 => 'listWizard',
             'eval'                      => array('mandatory'=>true, 'allowHtml'=>false, 'helpwizard'=>false),
             'sql'                       => "blob NULL"
