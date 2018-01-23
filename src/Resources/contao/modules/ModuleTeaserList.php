@@ -126,6 +126,8 @@ class ModuleTeaserList extends \ContentElement
             }
         }
 
+        $this->Template->teaserarray = $arrElements;
+
         /*//get teaser
         $teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY sorting ASC")->execute($this->teaserCategory);
 
