@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_teaser_items.cut.1">
         <source>Cut Teaser ID %s</source>
-        <target>Teaser kopieren ID %s</target>
+        <target>Teaser ID %s verschieben</target>
       </trans-unit>
       <trans-unit id="tl_teaser_items.copy.0">
         <source>Copy teaser</source>
