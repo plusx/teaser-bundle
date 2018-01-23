@@ -46,7 +46,7 @@ class ModuleTeaserList extends \ContentElement
 	protected function compile()
 	{
 		//get teaser
-		$teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY id DESC")->execute($this->teaserCategory);
+		$teaser = $this->Database->prepare("SELECT * FROM tl_teaser_items WHERE pid=? ORDER BY sorting ASC")->execute($this->teaserCategory);
 
 
 		// create array with all published teaser
