@@ -76,7 +76,7 @@ class ModuleTeaserList extends \ContentElement
 
                 if($objRow->teaserType == 'download' || $objRow->teaserType == 'video')
                 {
-                    $objFile = new \File(\FilesModel::findByUuid($objRow->fileSRC])->path);
+                    $objFile = new \File(\FilesModel::findByUuid($objRow->fileSRC)->path);
 
                     // Remove an existing file parameter (see #5683)
                     $strHref = \Environment::get('request');
