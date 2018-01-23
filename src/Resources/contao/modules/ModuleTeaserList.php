@@ -47,7 +47,7 @@ class ModuleTeaserList extends \ContentElement
     {
 
         $arrElements = array();
-        $objCte = \ContentModel::findPublishedByPidAndTable($this->id, 'tl_teaser_items');
+        $objCte = \ContentModel::findPublishedByPidAndTable($this->teaserCategory, 'tl_teaser_items');
 
         if ($objCte !== null)
         {
