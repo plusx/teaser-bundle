@@ -2,10 +2,10 @@
   <file datatype="php" original="src/Resources/contao/languages/en/modules.php" source-language="en">
     <body>
       <trans-unit id="MOD.teaser.0">
-        <source>Teaser Modul</source>
+        <source>Links &amp; Downloads</source>
       </trans-unit>
       <trans-unit id="MOD.teaser.1">
-        <source>Manage teasers</source>
+        <source>Manage links &amp; downloads</source>
       </trans-unit>
       <trans-unit id="MOD.tl_teaser_items">
         <source>Teaser</source>
@@ -26,7 +26,7 @@
         <source>Adds filters for teaser elements</source>
       </trans-unit>
       <trans-unit id="FMD.teaserupdates.0">
-        <source>Teaser filter</source>
+        <source>Teaser updates</source>
       </trans-unit>
       <trans-unit id="FMD.teaserupdates.1">
         <source>Shows new Teaser Elements</source>

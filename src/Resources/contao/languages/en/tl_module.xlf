@@ -5,7 +5,7 @@
 				<source>Please select a category</source>
 			</trans-unit>
 			<trans-unit id="tl_module.teaserCategory.1">
-				<source>Please select an assignment categorie.</source>
+				<source>Here you can choose the filterable categories.</source>
 			</trans-unit>
 		</body>
 	</file>
