@@ -6,8 +6,8 @@
         <target>Name der Kategorie</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.title.1">
-        <source>Manage items</source>
-        <target>Inhalte verwalten</target>
+        <source>Give the category a name</source>
+        <target>Benennen Sie die Kategorie</target>
       </trans-unit>
       <trans-unit id="tl_teaser_category.protected.0">
         <source>Protected</source>

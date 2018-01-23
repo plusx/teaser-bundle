@@ -5,7 +5,7 @@
         <source>Category name</source>
       </trans-unit>
       <trans-unit id="tl_teaser_category.title.1">
-        <source>Manage items</source>
+        <source>Give the category a name</source>
       </trans-unit>
       <trans-unit id="tl_teaser_category.protected.0">
         <source>Protected</source>
