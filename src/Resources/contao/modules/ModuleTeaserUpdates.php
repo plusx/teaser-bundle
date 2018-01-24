@@ -84,7 +84,7 @@ class ModuleTeaserUpdates extends \Module
 
                 $updates[$intCount]['id'] = $objRow->id;
                 $updates[$intCount]['tstamp'] = $objRow->tstamp;
-                $updates[$intCount]['teaserItemText'] = $objRow->teaserItemText;
+                $updates[$intCount]['subHeadline'] = $objRow->subHeadline;
                 $updates[$intCount]['url'] = $url;
 
                 $arrElements[] = $updates[$intCount];

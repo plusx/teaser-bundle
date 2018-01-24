@@ -4,7 +4,7 @@
         <?php foreach($this->updates as $update): ?>
             <a href="<?= $update['url'] ?>" class="link mb3 pb3 bb b--moon-gray">
                 <span class="db f6 gray b"><?= $this->parseDate('m/d/Y', $update['tstamp']) ?></span>
-                <span class="db"><?= \StringUtil::substr($update['teaserItemText'], 60) ?></span>
+                <span class="db"><?= \StringUtil::substr($update['subHeadline'], 60) ?></span>
             </a>
         <?php endforeach; ?>
     </div>
