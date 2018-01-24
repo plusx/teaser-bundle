@@ -7,6 +7,10 @@
  *
  * @license LGPL-3.0+
  */
+
+class_alias('Dehil\Teaser\TeaserItemsModel', 'TeaserItemsModel');
+class_alias('Dehil\Teaser\TeaserCategoryModel', 'TeaserCategoryModel');
+
 /**
  * Back end modules
  */

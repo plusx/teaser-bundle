@@ -30,7 +30,8 @@ class TeaserItemsModel extends \Model
         $arrColumns = array("$t.pid=?");
         if (!static::isPreviewMode($arrOptions))
         {
-            $arrColumns[] = "$t.published=''";
+            $time = \Date::floorToMinute();
+            $arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
         }
         if (!isset($arrOptions['order']))
         {

@@ -7,10 +7,10 @@
  * @license LGPL-3.0+
  */
 namespace Dehil\Teaser;
+
 use Psr\Log\LogLevel;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Patchwork\Utf8;
-use Dehil\Teaser\TeaserItemsModel;
 
 class ModuleTeaserList extends \ContentElement
 {
@@ -48,7 +48,7 @@ class ModuleTeaserList extends \ContentElement
     {
 
         $arrElements = array();
-        $objCte = Dehil\Teaser\TeaserItemsModel::findPublishedByPid($this->teaserCategory);
+        $objCte = \TeaserItemsModel::findPublishedByPid($this->teaserCategory);
 
         if ($objCte !== null)
         {
