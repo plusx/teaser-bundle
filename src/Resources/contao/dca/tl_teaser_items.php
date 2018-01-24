@@ -385,7 +385,7 @@ class tl_teaser_items extends Backend
 
             case 'create':
             case 'select':
-                if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
+                if (!strlen(Input::get('id')) || !in_array(Input::get('id'), $root))
                 {
                     throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to create teaseritems in teaser ID ' . Input::get('pid') . '.');
                 }
@@ -393,9 +393,22 @@ class tl_teaser_items extends Backend
 
             case 'cut':
             case 'copy':
-                if (!in_array(Input::get('pid'), $root))
+                $pid = Input::get('pid');
+                // Get category ID
+                if (Input::get('mode') == 1)
                 {
-                    throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to ' . Input::get('act') . ' teaseritem ID ' . $id . ' to teaser ID ' . Input::get('pid') . '.');
+                    $objTeaser = $this->Database->prepare("SELECT pid FROM tl_teaser_items WHERE id=?")
+                                               ->limit(1)
+                                               ->execute(Input::get('pid'));
+                    if ($objTeaser->numRows < 1)
+                    {
+                        throw new Contao\CoreBundle\Exception\AccessDeniedException('Invalid teaser ID ' . Input::get('pid') . '.');
+                    }
+                    $pid = $objTeaser->pid;
+                }
+                if (!in_array($pid, $root))
+                {
+                    throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to ' . Input::get('act') . ' teaser ID ' . $id . ' to teaser category ID ' . $pid . '.');
                 }
                 // NO BREAK STATEMENT HERE
 
