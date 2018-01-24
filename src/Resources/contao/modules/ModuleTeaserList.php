@@ -48,7 +48,7 @@ class ModuleTeaserList extends \ContentElement
     {
 
         $arrElements = array();
-        $objCte = \TeaserItemsModel::findPublishedByPid($this->teaserCategory);
+        $objCte = Dehil\Teaser\TeaserItemsModel::findPublishedByPid($this->teaserCategory);
 
         if ($objCte !== null)
         {
