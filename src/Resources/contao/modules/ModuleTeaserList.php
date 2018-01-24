@@ -10,6 +10,7 @@ namespace Dehil\Teaser;
 use Psr\Log\LogLevel;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Patchwork\Utf8;
+use Dehil\Teaser\TeaserItemsModel;
 
 class ModuleTeaserList extends \ContentElement
 {
