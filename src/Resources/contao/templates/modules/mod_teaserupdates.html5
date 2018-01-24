@@ -1,14 +1,11 @@
-<div class="teaser col-xs-12 col-sm-4 newsbox">
-	<div class="inside">
-		<h2>Updates</h2>
-		<?php
-			for($i = 0; $i < count($this->updates); $i++)
-			{
-				$date = $this->parseDate('m/d/Y', $this->updates[$i]['tstamp']);
-				$text = strip_tags(StringUtil::substrHtml($this->updates[$i]['teaserItemText'], 128), '<strong>') . ' ...';
-				$link = $this->updates[$i]['url'];
-				echo '<a href="' . $link . '"><div class="newsitem"><span class="date">' . $date . '</span><div class="text">' . $text . '</div></div></a>';
-			}
-		?>
-	</div>
+<div class="teaser relative mv3 col-xs-12 col-sm-4 newsbox">
+    <div class="inside pt3 pb4 ph4 bg-white h-100 flex flex-column">
+        <h2 class="f4 mv3 pb3 bb b--moon-gray ttu">Updates</h2>
+        <?php foreach($this->updates as $update): ?>
+            <a href="<?= $update['url'] ?>" class="link mb3 pb3 bb b--moon-gray">
+                <span class="db f6 gray b"><?= $this->parseDate('m/d/Y', $update['tstamp']) ?></span>
+                <span class="db"><?= \StringUtil::substr($update['teaserItemText'], 60) ?></span>
+            </a>
+        <?php endforeach; ?>
+    </div>
 </div>

@@ -1,32 +1,34 @@
-		<?php foreach($this->teaserarray as $teaser): ?>
-		<div class="teaser col-xs-12 col-sm-4 <?= $teaser['filter']; ?><?= $teaser['id']; ?>">
-			<div class="inside">
-				<h2><?= $teaser['headline']; ?></h2>
+<div class="<?= $this->class ?> block"<?= $this->cssID ?>>
+    <div class="row">
+        <?php foreach($this->teaserarray as $teaser): ?>
+            <div class="teaser relative mv3 col-xs-12 col-sm-6 col-md-4 teaser-type-<?= $teaser['teaserType'] ?> <?= $teaser['filter']; ?><?= $teaser['id']; ?>" data-href="<?php if ($teaser['teaserType'] == 'link'): ?><?= $teaser['link']; ?><?php else: ?><?= $teaser['href']; ?><?php endif; ?>">
+                <div class="inside pt3 pb4 ph4 bg-white h-100 flex flex-column">
+                    <h2 class="mv3 f4 ttu"><?= $teaser['headline']; ?></h2>
 
-				<figure class="image_container" itemscope="" itemtype="http://schema.org/ImageObject">
-					<?php if ($teaser['teaserType'] == 'video'): ?>
-						<a href="//www.youtube.com/watch?v=<?= $teaser['youtube'];?>" data-lity>
-					<?php endif; ?>
-					<img src="<?= $teaser['teaserImage']; ?>" itemprop="image">
-					<?php if ($teaser['teaserType'] == 'video'): ?>
-						</a>
-					<?php endif; ?>
-				</figure>
-				<div class="teasertext">
-					<?php if ($teaser['subHeadline']): ?>
-					<strong><?= $teaser['subHeadline']; ?></strong>
-					<?php endif; ?>
-					<?= $teaser['teaserText']; ?>
-				</div>
-				<div class="teaserlink">
-					<?php if ($teaser['teaserType'] == 'link'): ?>
-					<a class="more" href="<?= $teaser['link']; ?>"><?= $teaser['linkText']; ?></a>
-					<?php else: ?>
-					<a class="more" href="<?= $teaser['href']; ?>"><?= $teaser['title']; ?></a>
-					<?php endif; ?>
-				</div>
-			</div>
-		</div>
-		<?php endforeach; ?>
-	</div>
+                    <figure class="image_container" itemscope="" itemtype="http://schema.org/ImageObject">
+                        <?php if ($teaser['teaserType'] == 'video'): ?>
+                            <a href="//www.youtube.com/watch?v=<?= $teaser['youtube'];?>" class="relative db z-1" data-lity>
+                        <?php endif; ?>
+                        {{picture::<?= $teaser['teaserImage']; ?>?size=1}}
+                        <?php if ($teaser['teaserType'] == 'video'): ?>
+                            </a>
+                        <?php endif; ?>
+                    </figure>
+                    <div class="teasertext mv3">
+                        <?php if ($teaser['subHeadline']): ?>
+                        <strong class="db"><?= $teaser['subHeadline']; ?></strong>
+                        <?php endif; ?>
+                        <?= $teaser['teaserText']; ?>
+                    </div>
+                    <div class="mv3">
+                        <?php if ($teaser['teaserType'] == 'link'): ?>
+                        <a class="link link-arrow b" href="<?= $teaser['link']; ?>"><?= $teaser['linkText']; ?></a>
+                        <?php else: ?>
+                        <a class="link link-arrow b" href="<?= $teaser['href']; ?>"><?= $teaser['title']; ?></a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>

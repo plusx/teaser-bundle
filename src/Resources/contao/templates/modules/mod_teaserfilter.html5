@@ -1,25 +1,18 @@
-		<div class="col-xs-12 col-sm-4">
-			<h1 class="ph4">Marketing</h1>
-		</div>
-		<div class="col-xs-12 col-sm-4 col-sm-offset-4 filter pt2">
-			<?php if ($this->filterId): ?>
-				<select name="category">
-					<option value="*">Show all</option>
-					<option value=".<?= $this->filterId; ?>" selected><?= $this->currentSelected; ?></option>
-					<?php foreach ($this->optionsarray as $option): ?>
-					<option value=".<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
-					<?php endforeach ?>
-				</select>
-			<?php else: ?>
-				<select name="category">
-					<option value="*">Show all</option>
-					<?php foreach ($this->optionsarray as $option): ?>
-					<option value=".<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
-					<?php endforeach ?>
-				</select>
-			<?php endif; ?>
-		</div>
-	</div>
+<div class="<?= $this->class ?> block"<?= $this->cssID ?>>
+    <?php if ($this->filterId): ?>
+        <select name="category">
+            <option value="">Filter by category</option>
+            <option value="<?= $this->filterId; ?>" selected><?= $this->currentSelected; ?></option>
+            <?php foreach ($this->optionsarray as $option): ?>
+            <option value="<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
+            <?php endforeach ?>
+        </select>
+    <?php else: ?>
+        <select name="category">
+            <option value="">Filter by category</option>
+            <?php foreach ($this->optionsarray as $option): ?>
+            <option value="<?php echo preg_replace('/\W+/','',strtolower(strip_tags($option))); ?>"><?php echo $option ?></option>
+            <?php endforeach ?>
+        </select>
+    <?php endif; ?>
 </div>
-<div class="container-fluid">
-	<div id="grid" class="row filter">
