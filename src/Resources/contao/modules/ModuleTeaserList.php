@@ -47,7 +47,7 @@ class ModuleTeaserList extends \ContentElement
     {
 
         $arrElements = array();
-        $objCte = \ContentModel::findPublishedByPidAndTable($this->teaserCategory, 'tl_teaser_items');
+        $objCte = \TeaserItemsModel::findPublishedByPid($this->teaserCategory);
 
         if ($objCte !== null)
         {
@@ -56,7 +56,7 @@ class ModuleTeaserList extends \ContentElement
 
             while ($objCte->next())
             {
-                /** @var ContentModel $objRow */
+                /** @var TeaserItemsModel $objRow */
                 $objRow = $objCte->current();
 
                 // Add the "first" and "last" classes (see #2583)
