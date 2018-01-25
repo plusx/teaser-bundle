@@ -7,6 +7,12 @@
       <trans-unit id="tl_teaser_category.title.1">
         <source>Give the category a name</source>
       </trans-unit>
+      <trans-unit id="tl_teaser_category.jumpTo.0">
+        <source>Page to refer</source>
+      </trans-unit>
+      <trans-unit id="tl_teaser_category.jumpTo.1">
+        <source>Please choose a page where to refer after link is clicked.</source>
+      </trans-unit>
       <trans-unit id="tl_teaser_category.protected.0">
         <source>Protected</source>
       </trans-unit>

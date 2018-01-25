@@ -39,4 +39,25 @@ class TeaserItemsModel extends \Model
         }
         return static::findBy($arrColumns, $intPid, $arrOptions);
     }
+
+    /**
+     * Find all published teaser items
+     *
+     * @return Collection|null
+     */
+    public static function findPublished(array $arrOptions=array())
+    {
+        $t = static::$strTable;
+
+        if (!isset($arrOptions['order']))
+        {
+            $arrOptions['order'] = "$t.tstamp DESC";
+        }
+
+        if (BE_USER_LOGGED_IN) {
+            return static::findAll($arrOptions);
+        }
+
+        return static::findBy('published', 1, $arrOptions);
+    }
 }

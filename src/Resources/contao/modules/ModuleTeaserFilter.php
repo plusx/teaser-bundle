@@ -87,11 +87,14 @@ class ModuleTeaserFilter extends \Module
 				}
 			}
 		}
-		$filterset = array_unique($filterset);
-		$filterelements = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE id=?")->execute($this->teaserCategory)->filterelements;
-		$filterarray = \StringUtil::deserialize($filterelements);
-		$filterarray = array_intersect($filterarray, $filterset);
-		$this->Template->optionsarray = $filterarray;
+		if(!empty($filterset)) {
+			$filterset = array_unique($filterset);
+			$filterelements = $this->Database->prepare("SELECT filterelements FROM tl_teaser_category WHERE id=?")->execute($this->teaserCategory)->filterelements;
+			$filterarray = \StringUtil::deserialize($filterelements);
+			$filterarray = array_intersect($filterarray, $filterset);
+			$this->Template->optionsarray = $filterarray;
+		}
+
 		if(\Input::get('id', true))
 		{
 			$this->Template->filterId = \Input::get('id', true);

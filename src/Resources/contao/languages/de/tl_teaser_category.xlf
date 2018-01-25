@@ -9,6 +9,14 @@
         <source>Give the category a name</source>
         <target>Benennen Sie die Kategorie</target>
       </trans-unit>
+      <trans-unit id="tl_teaser_category.jumpTo.0">
+        <source>Page to refer</source>
+        <target>Weiterleitungsseite</target>
+      </trans-unit>
+      <trans-unit id="tl_teaser_category.jumpTo.1">
+        <source>Please choose a page where to refer after link is clicked.</source>
+        <target>Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden, wenn Sie den Link anklicken.</target>
+      </trans-unit>
       <trans-unit id="tl_teaser_category.protected.0">
         <source>Protected</source>
         <target>Zugriffsschutz</target>

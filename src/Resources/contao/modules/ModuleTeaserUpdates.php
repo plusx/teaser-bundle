@@ -53,7 +53,7 @@ class ModuleTeaserUpdates extends \Module
     {
 
         $arrElements = array();
-        $objCte = \TeaserItemsModel::findPublishedByPid($this->teaserCategory, array('limit' => 3));
+        $objCte = \TeaserItemsModel::findPublished(array('limit' => 3));
 
         if ($objCte !== null)
         {
@@ -79,7 +79,8 @@ class ModuleTeaserUpdates extends \Module
                 }
                 $objRow->classes = $arrCss;
 
-                $pageModel = \PageModel::findByPK($this->jumpTo);
+                $objCategory = \TeaserCategoryModel::findByPK($objRow->pid);
+                $pageModel = \PageModel::findByPK($objCategory->jumpTo);
                 $url = \Controller::generateFrontendUrl($pageModel->row(),'/id/' . $objRow->id);
 
                 $updates[$intCount]['id'] = $objRow->id;

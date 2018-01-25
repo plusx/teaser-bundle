@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
     'palettes' => array
     (
         '__selector__'                  => array('protected', 'addFilter'),
-        'default'                       => '{title_legend},title;{filter_legend:hide},addFilter;{protected_legend:hide},protected'
+        'default'                       => '{title_legend},title,jumpTo;{filter_legend:hide},addFilter;{protected_legend:hide},protected'
     ),
 
     // Subpalettes
@@ -171,8 +171,17 @@ $GLOBALS['TL_DCA']['tl_teaser_category'] = array
             'inputType'                 => 'listWizard',
             'eval'                      => array('mandatory'=>true, 'allowHtml'=>false, 'helpwizard'=>false),
             'sql'                       => "blob NULL"
+        ),
+        'jumpTo' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_category']['jumpTo'],
+            'exclude'                 => true,
+            'inputType'               => 'pageTree',
+            'foreignKey'              => 'tl_page.title',
+            'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'tl_class'=>'w50 clr'),
+            'sql'                     => "int(10) unsigned NOT NULL default '0'",
+            'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
         )
-
     )
 );
 
