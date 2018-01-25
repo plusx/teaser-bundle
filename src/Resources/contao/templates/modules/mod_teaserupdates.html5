@@ -1,4 +1,4 @@
-<div class="teaser relative mv3 col-xs-12 col-sm-4 newsbox">
+<div class="teaser relative mv3 col-xs-12 col-sm-6 col-md-4 newsbox">
     <div class="inside pt3 pb4 ph4 bg-white h-100 flex flex-column">
         <h2 class="f4 mv3 pb3 bb b--moon-gray ttu">Updates</h2>
         <?php foreach($this->updates as $update): ?>
