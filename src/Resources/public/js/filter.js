@@ -30,7 +30,9 @@
 
         // The DOM is ready!
 
-        filterTeasers();
+        if($('.mod_teaserfilter').length) {
+            filterTeasers();
+        }
 
         /*
             Filter teaser elements
