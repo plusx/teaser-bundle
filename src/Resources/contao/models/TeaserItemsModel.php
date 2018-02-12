@@ -48,6 +48,13 @@ class TeaserItemsModel extends \Model
     public static function findPublished(array $arrOptions=array())
     {
         $t = static::$strTable;
+        $arrColumns = array("$t.published=?");
+
+        if (!static::isPreviewMode($arrOptions))
+        {
+            $time = \Date::floorToMinute();
+            $arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.pid != 2";
+        }
 
         if (!isset($arrOptions['order']))
         {
@@ -58,6 +65,6 @@ class TeaserItemsModel extends \Model
             return static::findAll($arrOptions);
         }
 
-        return static::findBy('published', 1, $arrOptions);
+        return static::findBy($arrColumns, 1, $arrOptions);
     }
 }

@@ -7,6 +7,12 @@
 			<trans-unit id="tl_module.teaserCategory.1">
 				<source>Here you can choose the filterable categories.</source>
 			</trans-unit>
+			<trans-unit id="tl_module.numberOfTeasers.0">
+				<source>Total number of updates</source>
+			</trans-unit>
+			<trans-unit id="tl_module.numberOfTeasers.1">
+				<source>Here you can limit the total number of updates. Set to 0 to show all.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -53,7 +53,7 @@ class ModuleTeaserUpdates extends \Module
     {
 
         $arrElements = array();
-        $objCte = \TeaserItemsModel::findPublished(array('limit' => 3));
+        $objCte = \TeaserItemsModel::findPublished(array('limit' => $this->numberOfTeasers));
 
         if ($objCte !== null)
         {

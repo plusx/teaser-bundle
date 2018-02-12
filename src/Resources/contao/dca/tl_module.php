@@ -13,7 +13,7 @@
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserlist']      = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['teaserfilter']    = '{title_legend},name,headline,type;{config_legend},teaserCategory;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserupdates']    = '{title_legend},name,headline,type;{config_legend},teaserCategory,jumpTo;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['teaserupdates']    = '{title_legend},name,headline,type;{config_legend},numberOfTeasers;{template_legend:hide},customTpl;{expert_legend:hide},guests,cssID';
 /**
 * Add fields to tl_module
 */
@@ -27,13 +27,23 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['teaserCategory'] = array
 	'sql'                     => "blob NULL"
 );
 
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['numberOfTeasers'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['numberOfTeasers'],
+    'exclude'                 => true,
+    'inputType'               => 'text',
+    'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
+    'sql'                     => "smallint(5) unsigned NOT NULL default '0'",
+);
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['jumpTo'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['jumpTo'],
 	'exclude'                 => false,
 	'inputType'               => 'pageTree',
 	'foreignKey'              => 'tl_page.title',
-	'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
+	'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'tl_class'=>'clr w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'",
 	'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 );

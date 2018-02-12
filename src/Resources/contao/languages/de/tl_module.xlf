@@ -9,6 +9,14 @@
 				<source>Here you can choose the filterable categories.</source>
 				<target>Hier können Sie die zu filternden Kategorien auswählen.</target>
 			</trans-unit>
+			<trans-unit id="tl_module.numberOfTeasers.0">
+				<source>Total number of updates</source>
+				<target>Gesamtzahl der Updates</target>
+			</trans-unit>
+			<trans-unit id="tl_module.numberOfTeasers.1">
+				<source>Here you can limit the total number of updates. Set to 0 to show all.</source>
+				<target>Hier können Sie die Gesamtzahl der Updates begrenzen. Geben Sie 0 ein, um alle anzuzeigen.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
