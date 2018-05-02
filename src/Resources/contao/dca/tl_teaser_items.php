@@ -230,7 +230,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'style'=>'min-height:150px;resize:vertical;', 'tl_class'=>'w50 clr'),
+            'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'tl_class'=>'clr'),
             'sql'                     => "mediumtext NULL"
         ),
         'availableFilter' => array
