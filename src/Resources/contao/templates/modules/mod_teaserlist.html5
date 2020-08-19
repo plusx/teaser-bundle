@@ -23,6 +23,8 @@
                     <div class="mv3">
                         <?php if ($teaser['teaserType'] == 'link'): ?>
                         <a class="link link-arrow b" href="<?= $teaser['link']; ?>"><?= $teaser['linkText']; ?></a>
+                        <?php elseif ($teaser['teaserType'] == 'video' && !$teaser['href']): ?>
+                        <a class="link link-arrow b" href="//www.youtube.com/watch?v=<?= $teaser['youtube'];?>" data-lity>View now</a>
                         <?php else: ?>
                         <a class="link link-arrow b" href="<?= $teaser['href']; ?>"><?= $teaser['title']; ?></a>
                         <?php endif; ?>

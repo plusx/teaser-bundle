@@ -77,23 +77,25 @@ class ModuleTeaserList extends \ContentElement
 
                 if($objRow->teaserType == 'download' || $objRow->teaserType == 'video')
                 {
-                    $objFile = new \File(\FilesModel::findByUuid($objRow->fileSRC)->path);
+                    if($objRow->fileSRC) {
+                        $objFile = new \File(\FilesModel::findByUuid($objRow->fileSRC)->path);
 
-                    // Remove an existing file parameter (see #5683)
-                    $strHref = \Environment::get('request');
-                    if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
-                    {
-                        $strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+                        // Remove an existing file parameter (see #5683)
+                        $strHref = \Environment::get('request');
+                        if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
+                        {
+                            $strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
+                        }
+                        $strHref .= (strpos($strHref, '?') !== false ? '&amp;' : '?') . 'file=' . $objFile->path;
+                        $filesize = $this->getReadableSize($objFile->filesize, 1);
+                        $teaserarray[$intCount]['title']        = 'Download (' . $filesize . ')';
+                        $teaserarray[$intCount]['href']         = $strHref;
+                        $teaserarray[$intCount]['filesize']     = $filesize;
+                        $teaserarray[$intCount]['icon']         = \Image::getPath($objFile->icon);
+                        $teaserarray[$intCount]['mime']         = $objFile->mime;
+                        $teaserarray[$intCount]['extension']    = $objFile->extension;
+                        $teaserarray[$intCount]['path']         = $objFile->dirname;
                     }
-                    $strHref .= (strpos($strHref, '?') !== false ? '&amp;' : '?') . 'file=' . $objFile->path;
-                    $filesize = $this->getReadableSize($objFile->filesize, 1);
-                    $teaserarray[$intCount]['title']        = 'Download (' . $filesize . ')';
-                    $teaserarray[$intCount]['href']         = $strHref;
-                    $teaserarray[$intCount]['filesize']     = $filesize;
-                    $teaserarray[$intCount]['icon']         = \Image::getPath($objFile->icon);
-                    $teaserarray[$intCount]['mime']         = $objFile->mime;
-                    $teaserarray[$intCount]['extension']    = $objFile->extension;
-                    $teaserarray[$intCount]['path']         = $objFile->dirname;
                 }
                 if($objRow->teaserType == 'video') {
                     $teaserarray[$intCount]['youtube']      = $objRow->youtube;

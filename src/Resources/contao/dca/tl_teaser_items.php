@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_teaser_items'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_teaser_items']['fileSRC'],
             'exclude'                 => true,
             'inputType'               => 'fileTree',
-            'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'tl_class'=>'clr'),
             'load_callback'           => array
             (
                 array('tl_teaser_items', 'setSingleSrcFlags'),
